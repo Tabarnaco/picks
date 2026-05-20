@@ -7,341 +7,109 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #1a1a1a;
-    --border: #222222;
-    --border2: #2a2a2a;
-    --text: #f0f0f0;
-    --text2: #888888;
-    --text3: #555555;
-    --green: #00e676;
-    --green2: #00c853;
-    --green-dim: rgba(0,230,118,0.08);
-    --red: #ff5252;
-    --red-dim: rgba(255,82,82,0.08);
-    --amber: #ffab40;
-    --accent: #00e676;
-    --radius: 10px;
+    --bg:#0a0a0a; --bg2:#111111; --bg3:#1a1a1a;
+    --border:#222222; --border2:#2a2a2a;
+    --text:#f0f0f0; --text2:#888888; --text3:#555555;
+    --green:#00e676; --green-dim:rgba(0,230,118,0.08);
+    --red:#ff5252; --red-dim:rgba(255,82,82,0.08);
+    --amber:#ffab40; --radius:10px;
   }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;min-height:100vh;}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  header{border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);z-index:100;}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;color:var(--green);}
+  .logo span{color:var(--text2);font-size:13px;font-family:'DM Sans',sans-serif;letter-spacing:.05em;margin-left:10px;font-weight:400;}
+  .live-badge{display:flex;align-items:center;gap:6px;background:var(--green-dim);border:1px solid rgba(0,230,118,0.2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--green);letter-spacing:.06em;text-transform:uppercase;}
+  .live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    min-height: 100vh;
-  }
+  main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;}
 
-  /* ── HEADER ── */
-  header {
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    position: sticky;
-    top: 0;
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(10px);
-    z-index: 100;
-  }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: .12em;
-    color: var(--green);
-  }
-  .logo span { color: var(--text2); font-size: 13px; font-family: 'DM Sans', sans-serif; letter-spacing: .05em; margin-left: 10px; font-weight: 400; }
-  .live-badge {
-    display: flex; align-items: center; gap: 6px;
-    background: var(--green-dim);
-    border: 1px solid rgba(0,230,118,0.2);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--green);
-    letter-spacing: .06em;
-    text-transform: uppercase;
-  }
-  .live-dot {
-    width: 6px; height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
+  .page-title-block{margin-bottom:2rem;}
+  .page-title-block h1{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:.08em;color:var(--text);line-height:1;margin-bottom:6px;}
+  .page-title-block p{font-size:13px;color:var(--text2);}
+  .page-title-block p span{color:var(--green);font-weight:600;}
 
-  /* ── MAIN ── */
-  main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .tabs{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:4px;margin-bottom:2rem;width:fit-content;}
+  .tab{padding:7px 18px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;color:var(--text2);transition:all .2s;border:none;background:transparent;}
+  .tab.active{background:var(--bg3);color:var(--text);border:1px solid var(--border2);}
+  .tab:hover:not(.active){color:var(--text);}
 
-  /* ── PAGE TITLE ── */
-  .page-title-block { margin-bottom: 2rem; }
-  .page-title-block h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    letter-spacing: .08em;
-    color: var(--text);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .page-title-block p { font-size: 13px; color: var(--text2); }
-  .page-title-block p span { color: var(--green); font-weight: 600; }
+  .kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:2rem;}
+  @media(max-width:900px){.kpi-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:500px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+  .kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1rem;position:relative;overflow:hidden;}
+  .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border2);}
+  .kpi-card.highlight::before{background:var(--green);}
+  .kpi-card.highlight2::before{background:var(--amber);}
+  .kpi-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:8px;}
+  .kpi-value{font-family:'DM Mono',monospace;font-size:26px;font-weight:500;color:var(--text);line-height:1;margin-bottom:4px;}
+  .kpi-value.green{color:var(--green);}
+  .kpi-value.amber{color:var(--amber);}
+  .kpi-sub{font-size:11px;color:var(--text3);}
 
-  /* ── TABS ── */
-  .tabs {
-    display: flex; gap: 4px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 4px;
-    margin-bottom: 2rem;
-    width: fit-content;
-  }
-  .tab {
-    padding: 7px 18px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .04em;
-    cursor: pointer;
-    color: var(--text2);
-    transition: all .2s;
-    border: none;
-    background: transparent;
-  }
-  .tab.active {
-    background: var(--bg3);
-    color: var(--text);
-    border: 1px solid var(--border2);
-  }
-  .tab:hover:not(.active) { color: var(--text); }
+  .chart-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:2rem;}
+  .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.1em;color:var(--text);}
+  .section-sub{font-size:11px;color:var(--text2);}
+  .chart-container{position:relative;height:180px;}
+  canvas{width:100%!important;}
 
-  /* ── KPI GRID ── */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
-    margin-bottom: 2rem;
-  }
-  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 500px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:2rem;}
+  @media(max-width:700px){.bottom-grid{grid-template-columns:1fr;}}
 
-  .kpi-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.1rem 1rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .kpi-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--border2);
-  }
-  .kpi-card.highlight::before { background: var(--green); }
-  .kpi-card.highlight2::before { background: var(--amber); }
+  .table-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;}
+  .table-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .filter-pills{display:flex;gap:6px;flex-wrap:wrap;}
+  .pill{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);transition:all .2s;}
+  .pill.active{background:var(--green-dim);border-color:rgba(0,230,118,0.3);color:var(--green);}
 
-  .kpi-label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--text2);
-    margin-bottom: 8px;
-  }
-  .kpi-value {
-    font-family: 'DM Mono', monospace;
-    font-size: 26px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .kpi-value.green { color: var(--green); }
-  .kpi-value.red   { color: var(--red); }
-  .kpi-value.amber { color: var(--amber); }
-  .kpi-sub { font-size: 11px; color: var(--text3); }
+  table{width:100%;border-collapse:collapse;}
+  thead th{padding:10px 16px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);background:var(--bg3);border-bottom:1px solid var(--border);}
+  thead th.r{text-align:right;}
+  tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+  tbody tr:last-child{border-bottom:none;}
+  tbody tr:hover{background:rgba(255,255,255,0.02);}
+  tbody td{padding:11px 16px;font-size:12.5px;color:var(--text);vertical-align:middle;}
+  tbody td.r{text-align:right;}
+  tbody td.dim{color:var(--text2);font-size:12px;}
+  .result-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.06em;}
+  .result-win{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,230,118,0.2);}
+  .result-loss{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,82,82,0.2);}
+  .unit-badge{display:inline-block;width:22px;height:22px;border-radius:50%;font-size:10px;font-weight:700;text-align:center;line-height:22px;font-family:'DM Mono',monospace;}
+  .u1{background:rgba(99,179,237,.12);color:#63b3ed;}
+  .u2{background:rgba(154,117,234,.12);color:#9a75ea;}
+  .u3{background:rgba(255,171,64,.12);color:var(--amber);}
 
-  /* ── CHART AREA ── */
-  .chart-section {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.2rem;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: .1em;
-    color: var(--text);
-  }
-  .section-sub { font-size: 11px; color: var(--text2); }
+  /* ROI split — no bars */
+  .split-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;}
+  .split-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;color:var(--text);margin-bottom:1rem;}
+  .split-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+  .split-row:last-child{border-bottom:none;}
+  .split-label{color:var(--text2);}
+  .split-val{font-family:'DM Mono',monospace;font-weight:600;font-size:15px;}
 
-  .chart-container { position: relative; height: 180px; }
-  canvas { width: 100% !important; }
+  /* Calendar */
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
+  .cal-nav-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);border-radius:6px;padding:5px 14px;cursor:pointer;font-size:16px;font-weight:700;transition:all .2s;}
+  .cal-nav-btn:hover{color:var(--text);border-color:var(--text3);}
+  .cal-month-label{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;color:var(--text);}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-dow{text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);padding:4px 0 8px;}
+  .cal-cell{min-height:52px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px;}
+  .cal-cell.empty{background:transparent;border-color:transparent;}
+  .cal-cell.today{border-color:var(--text3);}
+  .cal-day-num{font-size:11px;color:var(--text3);font-weight:500;}
+  .cal-cell.has-win .cal-day-num{color:var(--green);}
+  .cal-cell.has-loss .cal-day-num{color:var(--red);}
 
-  /* ── BOTTOM GRID ── */
-  .bottom-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 2rem;
-  }
-  @media (max-width: 700px) { .bottom-grid { grid-template-columns: 1fr; } }
+  .cal-pnl{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;}
 
-  /* ── TABLE ── */
-  .table-section {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-  .table-header {
-    padding: 1.2rem 1.5rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
-  .pill {
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid var(--border2);
-    background: transparent;
-    color: var(--text2);
-    transition: all .2s;
-  }
-  .pill.active {
-    background: var(--green-dim);
-    border-color: rgba(0,230,118,0.3);
-    color: var(--green);
-  }
-
-  table { width: 100%; border-collapse: collapse; }
-  thead th {
-    padding: 10px 16px;
-    text-align: left;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--text3);
-    background: var(--bg3);
-    border-bottom: 1px solid var(--border);
-  }
-  thead th.r { text-align: right; }
-  tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background .15s;
-  }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: rgba(255,255,255,0.02); }
-  tbody td {
-    padding: 11px 16px;
-    font-size: 12.5px;
-    color: var(--text);
-    vertical-align: middle;
-  }
-  tbody td.r { text-align: right; }
-  tbody td.dim { color: var(--text2); font-size: 12px; }
-
-  .result-badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .06em;
-  }
-  .result-win  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,230,118,0.2); }
-  .result-loss { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(255,82,82,0.2); }
-
-  .unit-badge {
-    display: inline-block;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    font-size: 10px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 22px;
-    font-family: 'DM Mono', monospace;
-  }
-  .u1 { background: rgba(99,179,237,.12); color: #63b3ed; }
-  .u2 { background: rgba(154,117,234,.12); color: #9a75ea; }
-  .u3 { background: rgba(255,171,64,.12); color: var(--amber); }
-
-  /* ── SPLIT CARDS ── */
-  .split-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.3rem;
-  }
-  .split-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px;
-    letter-spacing: .1em;
-    color: var(--text);
-    margin-bottom: 1rem;
-  }
-  .split-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 12.5px;
-  }
-  .split-row:last-child { border-bottom: none; }
-  .split-label { color: var(--text2); }
-  .split-val { font-family: 'DM Mono', monospace; font-weight: 500; }
-  .split-bar {
-    height: 3px;
-    background: var(--border2);
-    border-radius: 2px;
-    margin-top: 5px;
-    overflow: hidden;
-  }
-  .split-bar-fill { height: 100%; border-radius: 2px; background: var(--green); }
-
-  /* ── DISCLAIMER ── */
-  .disclaimer {
-    text-align: center;
-    font-size: 11px;
-    color: var(--text3);
-    padding-top: 1rem;
-    line-height: 1.6;
-  }
-  .disclaimer a { color: var(--text2); }
-
-  /* ── HIDDEN VIEWS ── */
-  .view { display: none; }
-  .view.active { display: block; }
+  .disclaimer{text-align:center;font-size:11px;color:var(--text3);padding-top:1rem;line-height:1.6;}
+  .disclaimer a{color:var(--text2);}
+  .view{display:none;}
+  .view.active{display:block;}
 </style>
 </head>
 <body>
@@ -358,21 +126,18 @@
     <p>Model tracking since <span>May 7, 2026</span> · Unit-based results · All plays equally weighted · Last updated <span id="lastUpdate"></span></p>
   </div>
 
-  <!-- TABS -->
   <div class="tabs">
-    <button class="tab active" onclick="switchView('alltime')">All Time</button>
-    <button class="tab" onclick="switchView('monthly')">By Month</button>
-    <button class="tab" onclick="switchView('weekly')">By Week</button>
+    <button class="tab active" onclick="switchView('alltime',event)">All Time</button>
+    <button class="tab" onclick="switchView('monthly',event)">By Month</button>
+    <button class="tab" onclick="switchView('weekly',event)">By Week</button>
   </div>
 
-  <!-- ALL TIME VIEW -->
+  <!-- ═══ ALL TIME ═══ -->
   <div class="view active" id="view-alltime">
-
-    <!-- KPIs -->
     <div class="kpi-grid">
       <div class="kpi-card highlight">
         <div class="kpi-label">Net Units</div>
-        <div class="kpi-value green" id="kpi-net">+13.89u</div>
+        <div class="kpi-value green">+13.89u</div>
         <div class="kpi-sub">All time</div>
       </div>
       <div class="kpi-card highlight">
@@ -402,7 +167,7 @@
       </div>
     </div>
 
-    <!-- CUMULATIVE CHART -->
+    <!-- Cumulative chart — no X axis labels -->
     <div class="chart-section">
       <div class="section-header">
         <div>
@@ -410,77 +175,49 @@
           <div class="section-sub">Running total after each settled play</div>
         </div>
       </div>
-      <div class="chart-container">
-        <canvas id="cumulativeChart"></canvas>
-      </div>
+      <div class="chart-container"><canvas id="cumulativeChart"></canvas></div>
     </div>
 
-    <!-- BOTTOM GRID -->
+    <!-- Bottom grid: ROI by size + Sport split -->
     <div class="bottom-grid">
-
-      <!-- ROI by unit size -->
       <div class="split-card">
         <div class="split-title">ROI By Unit Size</div>
         <div class="split-row">
-          <span class="split-label">1 Unit plays (9 plays · 9u)</span>
-          <span class="split-val green">+14.3%</span>
+          <span class="split-label">1 Unit &nbsp;·&nbsp; 9 plays &nbsp;·&nbsp; 9u risked</span>
+          <span class="split-val" style="color:var(--green)">+14.3%</span>
         </div>
-        <div class="split-bar"><div class="split-bar-fill" style="width:14.3%"></div></div>
-        <div class="split-row" style="margin-top:8px;">
-          <span class="split-label">2 Unit plays (13 plays · 26u)</span>
-          <span class="split-val green">+35.4%</span>
+        <div class="split-row">
+          <span class="split-label">2 Units &nbsp;·&nbsp; 13 plays &nbsp;·&nbsp; 26u risked</span>
+          <span class="split-val" style="color:var(--green)">+35.4%</span>
         </div>
-        <div class="split-bar"><div class="split-bar-fill" style="width:35.4%"></div></div>
-        <div class="split-row" style="margin-top:8px;">
-          <span class="split-label">3 Unit plays (4 plays · 13u)</span>
-          <span class="split-val green">+25.9%</span>
+        <div class="split-row">
+          <span class="split-label">3 Units &nbsp;·&nbsp; 4 plays &nbsp;·&nbsp; 13u risked</span>
+          <span class="split-val" style="color:var(--green)">+25.9%</span>
         </div>
-        <div class="split-bar"><div class="split-bar-fill" style="width:25.9%"></div></div>
       </div>
-
-      <!-- Sport split -->
       <div class="split-card">
         <div class="split-title">Results By Sport</div>
         <div class="split-row">
           <span class="split-label">⚾ MLB</span>
-          <span class="split-val">24 plays · 15W–9L · +13.03u</span>
+          <span class="split-val">26 plays &nbsp;·&nbsp; 17W–9L &nbsp;·&nbsp; +13.89u</span>
         </div>
         <div class="split-row">
           <span class="split-label">🏀 NBA</span>
-          <span class="split-val dim">0 plays</span>
+          <span class="split-val" style="color:var(--text3)">0 plays</span>
         </div>
         <div class="split-row">
           <span class="split-label">🏒 NHL</span>
-          <span class="split-val dim">0 plays</span>
+          <span class="split-val" style="color:var(--text3)">0 plays</span>
         </div>
         <div class="split-row">
           <span class="split-label">🏈 NFL</span>
-          <span class="split-val dim">Off-season</span>
+          <span class="split-val" style="color:var(--text3)">Off-season</span>
         </div>
-        <div class="split-row">
-          <span class="split-label">📊 Sample warning</span>
-          <span class="split-val amber">26 plays — small</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- WIN/LOSS BAR CHART -->
-    <div class="chart-section">
-      <div class="section-header">
-        <div>
-          <div class="section-title">Daily P&L</div>
-          <div class="section-sub">Net units per day</div>
-        </div>
-      </div>
-      <div class="chart-container">
-        <canvas id="dailyChart"></canvas>
       </div>
     </div>
+  </div>
 
-  </div><!-- end alltime view -->
-
-  <!-- MONTHLY VIEW -->
+  <!-- ═══ MONTHLY ═══ -->
   <div class="view" id="view-monthly">
     <div class="kpi-grid">
       <div class="kpi-card highlight">
@@ -504,6 +241,23 @@
         <div class="kpi-sub">—</div>
       </div>
     </div>
+
+    <!-- Calendar -->
+    <div class="chart-section">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="calPrev()">&#8592;</button>
+        <span class="cal-month-label" id="calLabel"></span>
+        <button class="cal-nav-btn" onclick="calNext()">&#8594;</button>
+      </div>
+      <div class="cal-grid" id="calDow">
+        <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div>
+        <div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div>
+        <div class="cal-dow">Sat</div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <!-- Monthly summary table -->
     <div class="chart-section">
       <div class="section-header">
         <div class="section-title">Monthly Summary</div>
@@ -514,10 +268,7 @@
         <tbody>
           <tr>
             <td><strong>May 2026</strong></td>
-            <td>26</td>
-            <td>17–9</td>
-            <td>65.4%</td>
-            <td>48u</td>
+            <td>26</td><td>17–9</td><td>65.4%</td><td>48u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;font-weight:500;">+13.89u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;font-weight:500;">+28.9%</td>
           </tr>
@@ -526,8 +277,21 @@
     </div>
   </div>
 
-  <!-- WEEKLY VIEW -->
+  <!-- ═══ WEEKLY ═══ -->
   <div class="view" id="view-weekly">
+
+    <!-- Last 7 days bar chart -->
+    <div class="chart-section">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Daily P&L — Last 7 Days</div>
+          <div class="section-sub">Net units per day · most recent at right</div>
+        </div>
+      </div>
+      <div class="chart-container"><canvas id="dailyChart"></canvas></div>
+    </div>
+
+    <!-- Weekly breakdown table -->
     <div class="chart-section">
       <div class="section-header">
         <div class="section-title">Weekly Breakdown</div>
@@ -537,22 +301,19 @@
         <thead><tr><th>Week</th><th>Dates</th><th>Plays</th><th>Record</th><th>Units</th><th class="r">Net</th><th class="r">ROI</th></tr></thead>
         <tbody>
           <tr>
-            <td><strong>Week 19</strong></td>
-            <td class="dim">May 7–10</td>
+            <td><strong>Week 19</strong></td><td class="dim">May 7–10</td>
             <td>7</td><td>6–1</td><td>16u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+7.58u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+47.4%</td>
           </tr>
           <tr>
-            <td><strong>Week 20</strong></td>
-            <td class="dim">May 11–17</td>
+            <td><strong>Week 20</strong></td><td class="dim">May 11–17</td>
             <td>13</td><td>8–5</td><td>26u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+4.57u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+17.6%</td>
           </tr>
           <tr>
-            <td><strong>Week 21</strong></td>
-            <td class="dim">May 18–20 (ongoing)</td>
+            <td><strong>Week 21</strong></td><td class="dim">May 18–20 (ongoing)</td>
             <td>6</td><td>3–3</td><td>13u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+1.74u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+13.4%</td>
@@ -562,46 +323,34 @@
     </div>
   </div>
 
-  <!-- PLAY LOG TABLE -->
+  <!-- ═══ PLAY LOG ═══ -->
   <div class="table-section">
     <div class="table-header">
       <div>
         <div class="section-title" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.1em;">Play Log</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:3px;">All 26 settled plays · All plays equally weighted</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px;">All 26 settled plays</div>
       </div>
       <div class="filter-pills">
-        <button class="pill active" onclick="filterTable('all', this)">All</button>
-        <button class="pill" onclick="filterTable('win', this)">Wins</button>
-        <button class="pill" onclick="filterTable('loss', this)">Losses</button>
-
-
+        <button class="pill active" onclick="filterTable('all',this)">All</button>
+        <button class="pill" onclick="filterTable('win',this)">Wins</button>
+        <button class="pill" onclick="filterTable('loss',this)">Losses</button>
       </div>
     </div>
     <div style="overflow-x:auto;">
-    <table id="playTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Date</th>
-          <th>Play</th>
-          <th>Units</th>
-          <th>Odds</th>
-          <th>Result</th>
-          <th>Score</th>
-          <th class="r">P&L</th>
-        </tr>
-      </thead>
-      <tbody id="playTableBody">
-        <!-- Populated by JS -->
-      </tbody>
-    </table>
+      <table id="playTable">
+        <thead>
+          <tr>
+            <th>#</th><th>Date</th><th>Play</th><th>Units</th>
+            <th>Odds</th><th>Result</th><th>Score</th><th class="r">P&L</th>
+          </tr>
+        </thead>
+        <tbody id="playTableBody"></tbody>
+      </table>
     </div>
   </div>
 
   <div class="disclaimer">
     Past performance is not indicative of future results. For entertainment and tracking purposes only.<br>
-    
-    Sustainable long-run ROI target: +5–10% over 500+ plays. Current sample (26 plays) is too small to draw conclusions.<br>
     Gamble responsibly · <a href="#">1-800-GAMBLER</a>
   </div>
 
@@ -610,173 +359,247 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 
-// ── LAST UPDATED ──
-document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 
 // ── PLAY DATA ──
+// date stored as 'YYYY-M-D' for calendar logic, display as 'May X'
 const plays = [
-  { id:1,  date:'May 7',     play:'PIT ML',      units:1, odds:-115, result:'win',  score:'PIT 4–2 ARI',     pnl:+0.87 },
-  { id:2,  date:'May 7',     play:'TB ML',       units:2, odds:+102, result:'win',  score:'TB 8–4 BOS',      pnl:+2.04 },
-  { id:3,  date:'May 7',     play:'CHC/CIN U8',  units:3, odds:-110, result:'loss', score:'11 runs',         pnl:-3.00 },
-  { id:4,  date:'May 8',     play:'ATL ML',      units:2, odds:-102, result:'loss', score:'LAD 3–1 ATL',     pnl:-2.00 },
-  { id:5,  date:'May 8',     play:'NYY/MIL U7',  units:3, odds:+100, result:'win',  score:'MIL 6–0 (6)',     pnl:+3.00 },
-  { id:6,  date:'May 9', play:'ATL ML',      units:3, odds:+105, result:'win',  score:'ATL 7–2 LAD',     pnl:+3.15 },
-  { id:7,  date:'May 9', play:'PIT ML',      units:1, odds:-108, result:'win',  score:'PIT 13–3 SF',     pnl:+0.93 },
-  { id:8,  date:'May 10', play:'ATL ML',      units:2, odds:+100, result:'win',  score:'ATL 7–2 LAD',     pnl:+2.00 },
-  { id:9,  date:'May 10', play:'PHI ML',      units:1, odds:-140, result:'win',  score:'PHI 6–0 COL',     pnl:+0.71 },
-  { id:10, date:'May 11',     play:'TB/TOR U7',   units:1, odds:-118, result:'loss', score:'13 runs',         pnl:-1.00 },
-  { id:11, date:'May 11',     play:'AZ ML',       units:2, odds:+115, result:'win',  score:'AZ 1–0 TEX',      pnl:+2.30 },
-  { id:12, date:'May 12',     play:'PHI ML',      units:2, odds:-148, result:'win',  score:'PHI 2–1 BOS',     pnl:+1.35 },
-  { id:13, date:'May 12',     play:'PIT ML',      units:3, odds:-165, result:'win',  score:'PIT 3–1 COL',     pnl:+1.82 },
-  { id:14, date:'May 13',     play:'CHC ML',      units:1, odds:+118, result:'loss', score:'ATL 4–1 CHC',     pnl:-1.00 },
-  { id:15, date:'May 13',     play:'TOR ML',      units:2, odds:-105, result:'win',  score:'TOR 5–3 TB',      pnl:+1.90 },
-  { id:16, date:'May 14', play:'PHI ML',      units:2, odds:-135, result:'win',  score:'PHI 3–1 BOS',     pnl:+1.48 },
-  { id:17, date:'May 14', play:'CHC ML',      units:1, odds:+112, result:'win',  score:'CHC 2–0 ATL',     pnl:+1.12 },
-  { id:18, date:'May 15',     play:'NYM ML',      units:2, odds:+124, result:'loss', score:'NYY 5–2 NYM',     pnl:-2.00 },
-  { id:19, date:'May 15',     play:'ATL ML',      units:3, odds:-115, result:'win',  score:'ATL 3–2 BOS',     pnl:+2.61 },
-  { id:20, date:'May 16',     play:'NYM ML',      units:2, odds:+110, result:'win',  score:'NYM 6–3 NYY',     pnl:+2.20 },
-  { id:21, date:'May 16',     play:'ATL ML',      units:2, odds:-156, result:'loss', score:'BOS 3–2 ATL',     pnl:-2.00 },
-  { id:22, date:'May 16',     play:'TEX ML',      units:1, odds:-114, result:'loss', score:'HOU 4–1 TEX',     pnl:-1.00 },
-  { id:23, date:'May 17',     play:'PIT ML',      units:1, odds:+130, result:'loss', score:'PHI 6–0 PIT',     pnl:-1.00 },
-  { id:24, date:'May 18',     play:'PHI ML',      units:2, odds:-120, result:'win',  score:'PHI 5–4 CIN',     pnl:+1.67 },
-  { id:25, date:'May 19',     play:'MIL ML',      units:2, odds:-115, result:'win',  score:'MIL 5–2 CHC',     pnl:+1.74 },
-  { id:26, date:'May 19',     play:'TOR ML',      units:1, odds:+115, result:'loss', score:'NYY 5–4 TOR',     pnl:-1.00 },
+  { id:1,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'PIT ML',     units:1, odds:-115, result:'win',  score:'PIT 4–2 ARI',   pnl:+0.87 },
+  { id:2,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'TB ML',      units:2, odds:+102, result:'win',  score:'TB 8–4 BOS',    pnl:+2.04 },
+  { id:3,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'CHC/CIN U8', units:3, odds:-110, result:'loss', score:'11 runs',       pnl:-3.00 },
+  { id:4,  dateKey:'2026-5-8',  dateDisp:'May 8',  play:'ATL ML',     units:2, odds:-102, result:'loss', score:'LAD 3–1 ATL',   pnl:-2.00 },
+  { id:5,  dateKey:'2026-5-8',  dateDisp:'May 8',  play:'NYY/MIL U7', units:3, odds:+100, result:'win',  score:'MIL 6–0 (6)',   pnl:+3.00 },
+  { id:6,  dateKey:'2026-5-9',  dateDisp:'May 9',  play:'ATL ML',     units:3, odds:+105, result:'win',  score:'ATL 7–2 LAD',   pnl:+3.15 },
+  { id:7,  dateKey:'2026-5-9',  dateDisp:'May 9',  play:'PIT ML',     units:1, odds:-108, result:'win',  score:'PIT 13–3 SF',   pnl:+0.93 },
+  { id:8,  dateKey:'2026-5-10', dateDisp:'May 10', play:'ATL ML',     units:2, odds:+100, result:'win',  score:'ATL 7–2 LAD',   pnl:+2.00 },
+  { id:9,  dateKey:'2026-5-10', dateDisp:'May 10', play:'PHI ML',     units:1, odds:-140, result:'win',  score:'PHI 6–0 COL',   pnl:+0.71 },
+  { id:10, dateKey:'2026-5-11', dateDisp:'May 11', play:'TB/TOR U7',  units:1, odds:-118, result:'loss', score:'13 runs',       pnl:-1.00 },
+  { id:11, dateKey:'2026-5-11', dateDisp:'May 11', play:'AZ ML',      units:2, odds:+115, result:'win',  score:'AZ 1–0 TEX',    pnl:+2.30 },
+  { id:12, dateKey:'2026-5-12', dateDisp:'May 12', play:'PHI ML',     units:2, odds:-148, result:'win',  score:'PHI 2–1 BOS',   pnl:+1.35 },
+  { id:13, dateKey:'2026-5-12', dateDisp:'May 12', play:'PIT ML',     units:3, odds:-165, result:'win',  score:'PIT 3–1 COL',   pnl:+1.82 },
+  { id:14, dateKey:'2026-5-13', dateDisp:'May 13', play:'CHC ML',     units:1, odds:+118, result:'loss', score:'ATL 4–1 CHC',   pnl:-1.00 },
+  { id:15, dateKey:'2026-5-13', dateDisp:'May 13', play:'TOR ML',     units:2, odds:-105, result:'win',  score:'TOR 5–3 TB',    pnl:+1.90 },
+  { id:16, dateKey:'2026-5-14', dateDisp:'May 14', play:'PHI ML',     units:2, odds:-135, result:'win',  score:'PHI 3–1 BOS',   pnl:+1.48 },
+  { id:17, dateKey:'2026-5-14', dateDisp:'May 14', play:'CHC ML',     units:1, odds:+112, result:'win',  score:'CHC 2–0 ATL',   pnl:+1.12 },
+  { id:18, dateKey:'2026-5-15', dateDisp:'May 15', play:'NYM ML',     units:2, odds:+124, result:'loss', score:'NYY 5–2 NYM',   pnl:-2.00 },
+  { id:19, dateKey:'2026-5-15', dateDisp:'May 15', play:'ATL ML',     units:3, odds:-115, result:'win',  score:'ATL 3–2 BOS',   pnl:+2.61 },
+  { id:20, dateKey:'2026-5-16', dateDisp:'May 16', play:'NYM ML',     units:2, odds:+110, result:'win',  score:'NYM 6–3 NYY',   pnl:+2.20 },
+  { id:21, dateKey:'2026-5-16', dateDisp:'May 16', play:'ATL ML',     units:2, odds:-156, result:'loss', score:'BOS 3–2 ATL',   pnl:-2.00 },
+  { id:22, dateKey:'2026-5-16', dateDisp:'May 16', play:'TEX ML',     units:1, odds:-114, result:'loss', score:'HOU 4–1 TEX',   pnl:-1.00 },
+  { id:23, dateKey:'2026-5-17', dateDisp:'May 17', play:'PIT ML',     units:1, odds:+130, result:'loss', score:'PHI 6–0 PIT',   pnl:-1.00 },
+  { id:24, dateKey:'2026-5-18', dateDisp:'May 18', play:'PHI ML',     units:2, odds:-120, result:'win',  score:'PHI 5–4 CIN',   pnl:+1.67 },
+  { id:25, dateKey:'2026-5-19', dateDisp:'May 19', play:'MIL ML',     units:2, odds:-115, result:'win',  score:'MIL 5–2 CHC',   pnl:+1.74 },
+  { id:26, dateKey:'2026-5-19', dateDisp:'May 19', play:'TOR ML',     units:1, odds:+115, result:'loss', score:'NYY 5–4 TOR',   pnl:-1.00 },
 ];
 
-// ── RENDER TABLE ──
-function renderTable(filter = 'all') {
+// ── PLAY TABLE ──
+function renderTable(filter='all') {
   const tbody = document.getElementById('playTableBody');
-  const filtered = plays.filter(p => {
-    if (filter === 'win') return p.result === 'win';
-    if (filter === 'loss') return p.result === 'loss';
-
-
-    return true;
-  });
-
-  tbody.innerHTML = filtered.reverse().map(p => {
-    const resultClass = p.result === 'win' ? 'result-win' : 'result-loss';
-    const resultText  = p.result === 'win' ? 'WIN' : 'LOSS';
-    const unitClass   = p.units === 1 ? 'u1' : p.units === 2 ? 'u2' : 'u3';
-    const pnlColor    = p.pnl >= 0 ? 'var(--green)' : 'var(--red)';
-    const pnlStr      = (p.pnl >= 0 ? '+' : '') + p.pnl.toFixed(2) + 'u';
-    const oddsStr     = p.odds > 0 ? '+' + p.odds : p.odds;
+  const filtered = plays.filter(p => filter==='win' ? p.result==='win' : filter==='loss' ? p.result==='loss' : true);
+  tbody.innerHTML = [...filtered].reverse().map(p => {
+    const rc = p.result==='win' ? 'result-win' : 'result-loss';
+    const rt = p.result==='win' ? 'WIN' : 'LOSS';
+    const uc = p.units===1 ? 'u1' : p.units===2 ? 'u2' : 'u3';
+    const pc = p.pnl>=0 ? 'var(--green)' : 'var(--red)';
+    const ps = (p.pnl>=0?'+':'') + p.pnl.toFixed(2) + 'u';
+    const os = p.odds>0 ? '+'+p.odds : p.odds;
     return `<tr>
       <td class="dim">${p.id}</td>
-      <td>${p.date}</td>
+      <td>${p.dateDisp}</td>
       <td><strong>${p.play}</strong></td>
-      <td><span class="unit-badge ${unitClass}">${p.units}u</span></td>
-      <td class="dim" style="font-family:'DM Mono',monospace;">${oddsStr}</td>
-      <td><span class="result-badge ${resultClass}">${resultText}</span></td>
+      <td><span class="unit-badge ${uc}">${p.units}u</span></td>
+      <td class="dim" style="font-family:'DM Mono',monospace;">${os}</td>
+      <td><span class="result-badge ${rc}">${rt}</span></td>
       <td class="dim">${p.score}</td>
-      <td class="r" style="color:${pnlColor};font-family:'DM Mono',monospace;font-weight:500;">${pnlStr}</td>
+      <td class="r" style="color:${pc};font-family:'DM Mono',monospace;font-weight:500;">${ps}</td>
     </tr>`;
   }).join('');
-
-  // restore original order after rendering
-  plays.reverse();
 }
-
-function filterTable(filter, btn) {
-  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+function filterTable(f,btn) {
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
-  renderTable(filter);
+  renderTable(f);
 }
-
 renderTable();
 
-// ── CUMULATIVE CHART ──
-const cumData = [];
-let running = 0;
-plays.forEach(p => { running += p.pnl; cumData.push(+running.toFixed(2)); });
-
-const ctxCum = document.getElementById('cumulativeChart').getContext('2d');
-new Chart(ctxCum, {
-  type: 'line',
-  data: {
-    labels: plays.map(p => `#${p.id}`),
-    datasets: [{
-      label: 'Net Units',
-      data: cumData,
-      borderColor: '#00e676',
-      borderWidth: 2,
-      pointRadius: 3,
-      pointBackgroundColor: cumData.map((v, i) => plays[i].result === 'win' ? '#00e676' : '#ff5252'),
-      pointBorderColor: 'transparent',
-      fill: true,
-      backgroundColor: (ctx) => {
-        const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 180);
-        gradient.addColorStop(0, 'rgba(0,230,118,0.2)');
-        gradient.addColorStop(1, 'rgba(0,230,118,0)');
-        return gradient;
+// ── CUMULATIVE CHART (no X labels, no X axis) ──
+const cumData=[];let running=0;
+plays.forEach(p=>{running+=p.pnl;cumData.push(+running.toFixed(2));});
+new Chart(document.getElementById('cumulativeChart').getContext('2d'),{
+  type:'line',
+  data:{
+    labels:plays.map((_,i)=>i+1),
+    datasets:[{
+      data:cumData,
+      borderColor:'#00e676',borderWidth:2,
+      pointRadius:3,
+      pointBackgroundColor:plays.map(p=>p.result==='win'?'#00e676':'#ff5252'),
+      pointBorderColor:'transparent',
+      fill:true,
+      backgroundColor:(ctx)=>{
+        const g=ctx.chart.ctx.createLinearGradient(0,0,0,180);
+        g.addColorStop(0,'rgba(0,230,118,0.18)');
+        g.addColorStop(1,'rgba(0,230,118,0)');
+        return g;
       },
-      tension: 0.4,
+      tension:0.4
     }]
   },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: {
-      backgroundColor: '#1a1a1a',
-      borderColor: '#333',
-      borderWidth: 1,
-      titleColor: '#888',
-      bodyColor: '#f0f0f0',
-      callbacks: { label: ctx => ` ${ctx.raw > 0 ? '+' : ''}${ctx.raw}u` }
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{
+      backgroundColor:'#1a1a1a',borderColor:'#333',borderWidth:1,
+      titleColor:'#555',bodyColor:'#f0f0f0',
+      callbacks:{
+        title: items => `Play #${items[0].label}`,
+        label: ctx => ` ${ctx.raw>0?'+':''}${ctx.raw}u`
+      }
     }},
-    scales: {
-      x: { grid: { color: '#1a1a1a' }, ticks: { color: '#555', font: { size: 10 }, maxTicksLimit: 10 } },
-      y: { grid: { color: '#1a1a1a' }, ticks: { color: '#555', font: { family: 'DM Mono', size: 10 }, callback: v => (v>0?'+':'')+v+'u' } }
+    scales:{
+      x:{display:false},
+      y:{grid:{color:'#1a1a1a'},border:{display:false},ticks:{color:'#555',font:{family:'DM Mono',size:10},callback:v=>(v>0?'+':'')+v+'u'}}
     }
   }
 });
 
-// ── DAILY BAR CHART ──
-const dailyMap = {};
+// ── DAILY BAR CHART — last 7 calendar days, newest at right ──
+function buildDailyChart() {
+  // Build a map of dateKey -> net pnl
+  const dm = {};
+  plays.forEach(p => {
+    if(!dm[p.dateKey]) dm[p.dateKey] = 0;
+    dm[p.dateKey] += p.pnl;
+  });
+
+  // Generate last 7 calendar days ending yesterday
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate()-1);
+  const last7 = [];
+  for(let i=6;i>=0;i--) {
+    const d = new Date(yesterday);
+    d.setDate(yesterday.getDate()-i);
+    const key = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+    const label = d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    const val = dm[key] !== undefined ? +dm[key].toFixed(2) : null;
+    last7.push({label, val, key});
+  }
+
+  const labels = last7.map(d=>d.label);
+  const vals   = last7.map(d=>d.val);
+
+  new Chart(document.getElementById('dailyChart').getContext('2d'),{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[{
+        data:vals,
+        backgroundColor:vals.map(v=>v===null?'transparent':v>=0?'rgba(0,230,118,0.7)':'rgba(255,82,82,0.7)'),
+        borderColor:vals.map(v=>v===null?'transparent':v>=0?'#00e676':'#ff5252'),
+        borderWidth:1,borderRadius:4
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{
+        backgroundColor:'#1a1a1a',borderColor:'#333',borderWidth:1,
+        bodyColor:'#f0f0f0',
+        callbacks:{
+          label:ctx=>ctx.raw===null?' No plays':(` ${ctx.raw>0?'+':''}${ctx.raw}u`)
+        }
+      }},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#555',font:{size:10}}},
+        y:{grid:{color:'#1a1a1a'},border:{display:false},ticks:{color:'#555',font:{family:'DM Mono',size:10},callback:v=>(v>0?'+':'')+v+'u'}}
+      }
+    }
+  });
+}
+buildDailyChart();
+
+// ── CALENDAR ──
+// Build a map: 'YYYY-M-D' -> {pnl, wins, losses}
+const calData = {};
 plays.forEach(p => {
-  if (!dailyMap[p.date]) dailyMap[p.date] = 0;
-  dailyMap[p.date] += p.pnl;
+  if(!calData[p.dateKey]) calData[p.dateKey] = {pnl:0, wins:0, losses:0};
+  calData[p.dateKey].pnl += p.pnl;
+  if(p.result==='win') calData[p.dateKey].wins++;
+  else calData[p.dateKey].losses++;
 });
-const dailyLabels = Object.keys(dailyMap);
-const dailyVals   = Object.values(dailyMap).map(v => +v.toFixed(2));
 
-const ctxDaily = document.getElementById('dailyChart').getContext('2d');
-new Chart(ctxDaily, {
-  type: 'bar',
-  data: {
-    labels: dailyLabels,
-    datasets: [{
-      label: 'Daily P&L',
-      data: dailyVals,
-      backgroundColor: dailyVals.map(v => v >= 0 ? 'rgba(0,230,118,0.7)' : 'rgba(255,82,82,0.7)'),
-      borderColor:     dailyVals.map(v => v >= 0 ? '#00e676' : '#ff5252'),
-      borderWidth: 1,
-      borderRadius: 4,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: {
-      backgroundColor: '#1a1a1a',
-      borderColor: '#333',
-      borderWidth: 1,
-      bodyColor: '#f0f0f0',
-      callbacks: { label: ctx => ` ${ctx.raw > 0 ? '+' : ''}${ctx.raw}u` }
-    }},
-    scales: {
-      x: { grid: { display: false }, ticks: { color: '#555', font: { size: 10 } } },
-      y: { grid: { color: '#1a1a1a' }, ticks: { color: '#555', font: { family: 'DM Mono', size: 10 }, callback: v => (v>0?'+':'')+v+'u' } }
-    }
+let calYear = 2026, calMonth = 4; // 0-indexed: 4 = May
+
+function renderCalendar() {
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calLabel').textContent = `${monthNames[calMonth]} ${calYear}`;
+
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const today = new Date();
+
+  // Empty cells before first day
+  for(let i=0;i<firstDay;i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell empty';
+    grid.appendChild(cell);
   }
-});
+
+  // Day cells
+  for(let d=1;d<=daysInMonth;d++) {
+    const key = `${calYear}-${calMonth+1}-${d}`;
+    const data = calData[key];
+    const cell = document.createElement('div');
+
+    let cls = 'cal-cell';
+    if(today.getFullYear()===calYear && today.getMonth()===calMonth && today.getDate()===d) cls+=' today';
+
+    if(data) {
+      if(data.pnl>=0) cls+=' has-win';
+      else cls+=' has-loss';
+    }
+
+    cell.className = cls;
+
+    const dayNum = document.createElement('div');
+    dayNum.className = 'cal-day-num';
+    dayNum.textContent = d;
+    cell.appendChild(dayNum);
+
+    if(data) {
+      const pnlEl = document.createElement('div');
+      pnlEl.className = 'cal-pnl';
+      const net = +data.pnl.toFixed(2);
+      pnlEl.textContent = (net>=0?'+':'')+net+'u';
+      pnlEl.style.color = net>=0 ? 'var(--green)' : 'var(--red)';
+      cell.appendChild(pnlEl);
+    }
+
+    grid.appendChild(cell);
+  }
+}
+
+function calPrev() {
+  calMonth--;
+  if(calMonth<0){calMonth=11;calYear--;}
+  renderCalendar();
+}
+function calNext() {
+  calMonth++;
+  if(calMonth>11){calMonth=0;calYear++;}
+  renderCalendar();
+}
+
+renderCalendar();
 
 // ── TAB SWITCH ──
-function switchView(id) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('view-' + id).classList.add('active');
-  event.target.classList.add('active');
+function switchView(id,e) {
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  e.target.classList.add('active');
 }
 
 </script>
