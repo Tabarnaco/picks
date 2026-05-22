@@ -82,7 +82,13 @@
   .u2{background:rgba(154,117,234,.12);color:#9a75ea;}
   .u3{background:rgba(255,171,64,.12);color:var(--amber);}
 
-  /* ROI split — no bars */
+  .sport-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.04em;vertical-align:middle;margin-left:4px;}
+  .sport-mlb{background:rgba(0,230,118,.1);color:var(--green);}
+  .sport-nhl{background:rgba(99,179,237,.1);color:#63b3ed;}
+  .sport-nba{background:rgba(255,171,64,.1);color:var(--amber);}
+  .sport-nfl{background:rgba(154,117,234,.1);color:#9a75ea;}
+
+  /* ROI split */
   .split-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;}
   .split-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;color:var(--text);margin-bottom:1rem;}
   .split-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
@@ -103,7 +109,6 @@
   .cal-day-num{font-size:11px;color:var(--text3);font-weight:500;}
   .cal-cell.has-win .cal-day-num{color:var(--green);}
   .cal-cell.has-loss .cal-day-num{color:var(--red);}
-
   .cal-pnl{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;}
 
   .disclaimer{text-align:center;font-size:11px;color:var(--text3);padding-top:1rem;line-height:1.6;}
@@ -137,37 +142,36 @@
     <div class="kpi-grid">
       <div class="kpi-card highlight">
         <div class="kpi-label">Net Units</div>
-        <div class="kpi-value green">+17.34u</div>
+        <div class="kpi-value green" id="kpi-net">+17.34u</div>
         <div class="kpi-sub">All time</div>
       </div>
       <div class="kpi-card highlight">
         <div class="kpi-label">ROI</div>
-        <div class="kpi-value green">+34.0%</div>
+        <div class="kpi-value green" id="kpi-roi">+34.0%</div>
         <div class="kpi-sub">Units risked basis</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Record</div>
-        <div class="kpi-value">19–9</div>
-        <div class="kpi-sub">28 plays settled</div>
+        <div class="kpi-value" id="kpi-record">19–9</div>
+        <div class="kpi-sub" id="kpi-plays">28 plays settled</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Win Rate</div>
-        <div class="kpi-value">67.9%</div>
+        <div class="kpi-value" id="kpi-wr">67.9%</div>
         <div class="kpi-sub">Breakeven = 52.4%</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Units Risked</div>
-        <div class="kpi-value">51u</div>
+        <div class="kpi-value" id="kpi-risked">51u</div>
         <div class="kpi-sub">Total wagered</div>
       </div>
       <div class="kpi-card highlight2">
         <div class="kpi-label">Avg Odds</div>
-        <div class="kpi-value">-108</div>
+        <div class="kpi-value" id="kpi-odds">-108</div>
         <div class="kpi-sub">Blended line</div>
       </div>
     </div>
 
-    <!-- Cumulative chart — no X axis labels -->
     <div class="chart-section">
       <div class="section-header">
         <div>
@@ -178,13 +182,12 @@
       <div class="chart-container"><canvas id="cumulativeChart"></canvas></div>
     </div>
 
-    <!-- Bottom grid: ROI by size + Sport split -->
     <div class="bottom-grid">
       <div class="split-card">
         <div class="split-title">ROI By Unit Size</div>
         <div class="split-row">
-          <span class="split-label">1 Unit &nbsp;·&nbsp; 9 plays &nbsp;·&nbsp; 9u risked</span>
-          <span class="split-val" style="color:var(--green)">+14.3%</span>
+          <span class="split-label">1 Unit &nbsp;·&nbsp; 10 plays &nbsp;·&nbsp; 10u risked</span>
+          <span class="split-val" style="color:var(--red)">-0.8%</span>
         </div>
         <div class="split-row">
           <span class="split-label">2 Units &nbsp;·&nbsp; 13 plays &nbsp;·&nbsp; 26u risked</span>
@@ -197,12 +200,12 @@
         <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
           <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);margin-bottom:.7rem;">Win Rate By Unit Size</div>
           <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid var(--border);">
-            <span style="color:var(--text2)">1 Unit &nbsp;·&nbsp; 9 plays</span>
-            <span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">4W–5L &nbsp;·&nbsp; 44.4%</span>
+            <span style="color:var(--text2)">1 Unit &nbsp;·&nbsp; 10 plays</span>
+            <span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">5W–5L &nbsp;·&nbsp; 50.0%</span>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid var(--border);">
-            <span style="color:var(--text2)">2 Units &nbsp;·&nbsp; 12 plays</span>
-            <span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">9W–3L &nbsp;·&nbsp; 75.0%</span>
+            <span style="color:var(--text2)">2 Units &nbsp;·&nbsp; 13 plays</span>
+            <span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">10W–3L &nbsp;·&nbsp; 76.9%</span>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;">
             <span style="color:var(--text2)">3 Units &nbsp;·&nbsp; 5 plays</span>
@@ -210,24 +213,11 @@
           </div>
         </div>
       </div>
+
+      <!-- SPORT SPLIT — dynamically rendered -->
       <div class="split-card">
         <div class="split-title">Results By Sport</div>
-        <div class="split-row">
-          <span class="split-label">⚾ MLB</span>
-          <span class="split-val">28 plays &nbsp;·&nbsp; 19W–9L &nbsp;·&nbsp; +17.34u</span>
-        </div>
-        <div class="split-row">
-          <span class="split-label">🏀 NBA</span>
-          <span class="split-val" style="color:var(--text3)">0 plays</span>
-        </div>
-        <div class="split-row">
-          <span class="split-label">🏒 NHL</span>
-          <span class="split-val" style="color:var(--text3)">0 plays</span>
-        </div>
-        <div class="split-row">
-          <span class="split-label">🏈 NFL</span>
-          <span class="split-val" style="color:var(--text3)">Off-season</span>
-        </div>
+        <div id="sportSplitContainer"></div>
       </div>
     </div>
   </div>
@@ -257,7 +247,6 @@
       </div>
     </div>
 
-    <!-- Calendar -->
     <div class="chart-section">
       <div class="cal-nav">
         <button class="cal-nav-btn" onclick="calPrev()">&#8592;</button>
@@ -272,7 +261,6 @@
       <div class="cal-grid" id="calGrid"></div>
     </div>
 
-    <!-- Monthly summary table -->
     <div class="chart-section">
       <div class="section-header">
         <div class="section-title">Monthly Summary</div>
@@ -294,8 +282,6 @@
 
   <!-- ═══ WEEKLY ═══ -->
   <div class="view" id="view-weekly">
-
-    <!-- Last 7 days bar chart -->
     <div class="chart-section">
       <div class="section-header">
         <div>
@@ -306,7 +292,6 @@
       <div class="chart-container"><canvas id="dailyChart"></canvas></div>
     </div>
 
-    <!-- Weekly breakdown table -->
     <div class="chart-section">
       <div class="section-header">
         <div class="section-title">Weekly Breakdown</div>
@@ -329,9 +314,9 @@
           </tr>
           <tr>
             <td><strong>Week 21</strong></td><td class="dim">May 18–21 (ongoing)</td>
-            <td>8</td><td>4W-4L</td><td>16u</td>
+            <td>8</td><td>5W–3L</td><td>17u</td>
             <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+5.21u</td>
-            <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+32.6%</td>
+            <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+30.6%</td>
           </tr>
         </tbody>
       </table>
@@ -343,19 +328,22 @@
     <div class="table-header">
       <div>
         <div class="section-title" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.1em;">Play Log</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:3px;">All 28 settled plays</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px;">All 28 settled plays · 1 pending (CLE +6.5)</div>
       </div>
       <div class="filter-pills">
         <button class="pill active" onclick="filterTable('all',this)">All</button>
         <button class="pill" onclick="filterTable('win',this)">Wins</button>
         <button class="pill" onclick="filterTable('loss',this)">Losses</button>
+        <button class="pill" onclick="filterTable('MLB',this)">⚾ MLB</button>
+        <button class="pill" onclick="filterTable('NHL',this)">🏒 NHL</button>
+        <button class="pill" onclick="filterTable('NBA',this)">🏀 NBA</button>
       </div>
     </div>
     <div style="overflow-x:auto;">
       <table id="playTable">
         <thead>
           <tr>
-            <th>#</th><th>Date</th><th>Play</th><th>Units</th>
+            <th>#</th><th>Date</th><th>Play</th><th>Sport</th><th>Units</th>
             <th>Odds</th><th>Result</th><th>Score</th><th class="r">P&L</th>
           </tr>
         </thead>
@@ -376,43 +364,83 @@
 
 document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 
-// ── PLAY DATA ──
-// date stored as 'YYYY-M-D' for calendar logic, display as 'May X'
+// ── PLAY DATA — sport field added, VGK correctly tagged NHL ──
 const plays = [
-  { id:1,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'PIT ML',     units:1, odds:-115, result:'win',  score:'PIT 4–2 ARI',   pnl:+0.87 },
-  { id:2,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'TB ML',      units:2, odds:+102, result:'win',  score:'TB 8–4 BOS',    pnl:+2.04 },
-  { id:3,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'CHC/CIN U8', units:3, odds:-110, result:'loss', score:'11 runs',       pnl:-3.00 },
-  { id:4,  dateKey:'2026-5-8',  dateDisp:'May 8',  play:'ATL ML',     units:2, odds:-102, result:'loss', score:'LAD 3–1 ATL',   pnl:-2.00 },
-  { id:5,  dateKey:'2026-5-8',  dateDisp:'May 8',  play:'NYY/MIL U7', units:3, odds:+100, result:'win',  score:'MIL 6–0 (6)',   pnl:+3.00 },
-  { id:6,  dateKey:'2026-5-9',  dateDisp:'May 9',  play:'ATL ML',     units:3, odds:+105, result:'win',  score:'ATL 7–2 LAD',   pnl:+3.15 },
-  { id:7,  dateKey:'2026-5-9',  dateDisp:'May 9',  play:'PIT ML',     units:1, odds:-108, result:'win',  score:'PIT 13–3 SF',   pnl:+0.93 },
-  { id:8,  dateKey:'2026-5-10', dateDisp:'May 10', play:'ATL ML',     units:2, odds:+100, result:'win',  score:'ATL 7–2 LAD',   pnl:+2.00 },
-  { id:9,  dateKey:'2026-5-10', dateDisp:'May 10', play:'PHI ML',     units:1, odds:-140, result:'win',  score:'PHI 6–0 COL',   pnl:+0.71 },
-  { id:10, dateKey:'2026-5-11', dateDisp:'May 11', play:'TB/TOR U7',  units:1, odds:-118, result:'loss', score:'13 runs',       pnl:-1.00 },
-  { id:11, dateKey:'2026-5-11', dateDisp:'May 11', play:'AZ ML',      units:2, odds:+115, result:'win',  score:'AZ 1–0 TEX',    pnl:+2.30 },
-  { id:12, dateKey:'2026-5-12', dateDisp:'May 12', play:'PHI ML',     units:2, odds:-148, result:'win',  score:'PHI 2–1 BOS',   pnl:+1.35 },
-  { id:13, dateKey:'2026-5-12', dateDisp:'May 12', play:'PIT ML',     units:3, odds:-165, result:'win',  score:'PIT 3–1 COL',   pnl:+1.82 },
-  { id:14, dateKey:'2026-5-13', dateDisp:'May 13', play:'CHC ML',     units:1, odds:+118, result:'loss', score:'ATL 4–1 CHC',   pnl:-1.00 },
-  { id:15, dateKey:'2026-5-13', dateDisp:'May 13', play:'TOR ML',     units:2, odds:-105, result:'win',  score:'TOR 5–3 TB',    pnl:+1.90 },
-  { id:16, dateKey:'2026-5-14', dateDisp:'May 14', play:'PHI ML',     units:2, odds:-135, result:'win',  score:'PHI 3–1 BOS',   pnl:+1.48 },
-  { id:17, dateKey:'2026-5-14', dateDisp:'May 14', play:'CHC ML',     units:1, odds:+112, result:'win',  score:'CHC 2–0 ATL',   pnl:+1.12 },
-  { id:18, dateKey:'2026-5-15', dateDisp:'May 15', play:'NYM ML',     units:2, odds:+124, result:'loss', score:'NYY 5–2 NYM',   pnl:-2.00 },
-  { id:19, dateKey:'2026-5-15', dateDisp:'May 15', play:'ATL ML',     units:3, odds:-115, result:'win',  score:'ATL 3–2 BOS',   pnl:+2.61 },
-  { id:20, dateKey:'2026-5-16', dateDisp:'May 16', play:'NYM ML',     units:2, odds:+110, result:'win',  score:'NYM 6–3 NYY',   pnl:+2.20 },
-  { id:21, dateKey:'2026-5-16', dateDisp:'May 16', play:'ATL ML',     units:2, odds:-156, result:'loss', score:'BOS 3–2 ATL',   pnl:-2.00 },
-  { id:22, dateKey:'2026-5-16', dateDisp:'May 16', play:'TEX ML',     units:1, odds:-114, result:'loss', score:'HOU 4–1 TEX',   pnl:-1.00 },
-  { id:23, dateKey:'2026-5-17', dateDisp:'May 17', play:'PIT ML',     units:1, odds:+130, result:'loss', score:'PHI 6–0 PIT',   pnl:-1.00 },
-  { id:24, dateKey:'2026-5-18', dateDisp:'May 18', play:'PHI ML',     units:2, odds:-120, result:'win',  score:'PHI 5–4 CIN',   pnl:+1.67 },
-  { id:25, dateKey:'2026-5-19', dateDisp:'May 19', play:'MIL ML',     units:2, odds:-115, result:'win',  score:'MIL 5–2 CHC',   pnl:+1.74 },
-  { id:26, dateKey:'2026-5-19', dateDisp:'May 19', play:'TOR ML',     units:1, odds:+115, result:'loss', score:'NYY 5–4 TOR',   pnl:-1.00 },
-  { id:27, dateKey:'2026-5-20', dateDisp:'May 20', play:'MIL ML',     units:2, odds:+100, result:'win',  score:'MIL 5–0 CHC',   pnl:+2.00 },
-  { id:28, dateKey:'2026-5-20', dateDisp:'May 20', play:'VGK ML',     units:1, odds:+145, result:'win',  score:'VGK 4–2 COL',   pnl:+1.45 },
+  { id:1,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'PIT ML',     sport:'MLB', units:1, odds:-115, result:'win',  score:'PIT 4–2 ARI',   pnl:+0.87 },
+  { id:2,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'TB ML',      sport:'MLB', units:2, odds:+102, result:'win',  score:'TB 8–4 BOS',    pnl:+2.04 },
+  { id:3,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'CHC/CIN U8', sport:'MLB', units:3, odds:-110, result:'loss', score:'11 runs',       pnl:-3.00 },
+  { id:4,  dateKey:'2026-5-8',  dateDisp:'May 8',  play:'ATL ML',     sport:'MLB', units:2, odds:-102, result:'loss', score:'LAD 3–1 ATL',   pnl:-2.00 },
+  { id:5,  dateKey:'2026-5-8',  dateDisp:'May 8',  play:'NYY/MIL U7', sport:'MLB', units:3, odds:+100, result:'win',  score:'MIL 6–0 (6)',   pnl:+3.00 },
+  { id:6,  dateKey:'2026-5-9',  dateDisp:'May 9',  play:'ATL ML',     sport:'MLB', units:3, odds:+105, result:'win',  score:'ATL 7–2 LAD',   pnl:+3.15 },
+  { id:7,  dateKey:'2026-5-9',  dateDisp:'May 9',  play:'PIT ML',     sport:'MLB', units:1, odds:-108, result:'win',  score:'PIT 13–3 SF',   pnl:+0.93 },
+  { id:8,  dateKey:'2026-5-10', dateDisp:'May 10', play:'ATL ML',     sport:'MLB', units:2, odds:+100, result:'win',  score:'ATL 7–2 LAD',   pnl:+2.00 },
+  { id:9,  dateKey:'2026-5-10', dateDisp:'May 10', play:'PHI ML',     sport:'MLB', units:1, odds:-140, result:'win',  score:'PHI 6–0 COL',   pnl:+0.71 },
+  { id:10, dateKey:'2026-5-11', dateDisp:'May 11', play:'TB/TOR U7',  sport:'MLB', units:1, odds:-118, result:'loss', score:'13 runs',       pnl:-1.00 },
+  { id:11, dateKey:'2026-5-11', dateDisp:'May 11', play:'AZ ML',      sport:'MLB', units:2, odds:+115, result:'win',  score:'AZ 1–0 TEX',    pnl:+2.30 },
+  { id:12, dateKey:'2026-5-12', dateDisp:'May 12', play:'PHI ML',     sport:'MLB', units:2, odds:-148, result:'win',  score:'PHI 2–1 BOS',   pnl:+1.35 },
+  { id:13, dateKey:'2026-5-12', dateDisp:'May 12', play:'PIT ML',     sport:'MLB', units:3, odds:-165, result:'win',  score:'PIT 3–1 COL',   pnl:+1.82 },
+  { id:14, dateKey:'2026-5-13', dateDisp:'May 13', play:'CHC ML',     sport:'MLB', units:1, odds:+118, result:'loss', score:'ATL 4–1 CHC',   pnl:-1.00 },
+  { id:15, dateKey:'2026-5-13', dateDisp:'May 13', play:'TOR ML',     sport:'MLB', units:2, odds:-105, result:'win',  score:'TOR 5–3 TB',    pnl:+1.90 },
+  { id:16, dateKey:'2026-5-14', dateDisp:'May 14', play:'PHI ML',     sport:'MLB', units:2, odds:-135, result:'win',  score:'PHI 3–1 BOS',   pnl:+1.48 },
+  { id:17, dateKey:'2026-5-14', dateDisp:'May 14', play:'CHC ML',     sport:'MLB', units:1, odds:+112, result:'win',  score:'CHC 2–0 ATL',   pnl:+1.12 },
+  { id:18, dateKey:'2026-5-15', dateDisp:'May 15', play:'NYM ML',     sport:'MLB', units:2, odds:+124, result:'loss', score:'NYY 5–2 NYM',   pnl:-2.00 },
+  { id:19, dateKey:'2026-5-15', dateDisp:'May 15', play:'ATL ML',     sport:'MLB', units:3, odds:-115, result:'win',  score:'ATL 3–2 BOS',   pnl:+2.61 },
+  { id:20, dateKey:'2026-5-16', dateDisp:'May 16', play:'NYM ML',     sport:'MLB', units:2, odds:+110, result:'win',  score:'NYM 6–3 NYY',   pnl:+2.20 },
+  { id:21, dateKey:'2026-5-16', dateDisp:'May 16', play:'ATL ML',     sport:'MLB', units:2, odds:-156, result:'loss', score:'BOS 3–2 ATL',   pnl:-2.00 },
+  { id:22, dateKey:'2026-5-16', dateDisp:'May 16', play:'TEX ML',     sport:'MLB', units:1, odds:-114, result:'loss', score:'HOU 4–1 TEX',   pnl:-1.00 },
+  { id:23, dateKey:'2026-5-17', dateDisp:'May 17', play:'PIT ML',     sport:'MLB', units:1, odds:+130, result:'loss', score:'PHI 6–0 PIT',   pnl:-1.00 },
+  { id:24, dateKey:'2026-5-18', dateDisp:'May 18', play:'PHI ML',     sport:'MLB', units:2, odds:-120, result:'win',  score:'PHI 5–4 CIN',   pnl:+1.67 },
+  { id:25, dateKey:'2026-5-19', dateDisp:'May 19', play:'MIL ML',     sport:'MLB', units:2, odds:-115, result:'win',  score:'MIL 5–2 CHC',   pnl:+1.74 },
+  { id:26, dateKey:'2026-5-19', dateDisp:'May 19', play:'TOR ML',     sport:'MLB', units:1, odds:+115, result:'loss', score:'NYY 5–4 TOR',   pnl:-1.00 },
+  { id:27, dateKey:'2026-5-20', dateDisp:'May 20', play:'MIL ML',     sport:'MLB', units:2, odds:+100, result:'win',  score:'MIL 5–0 CHC',   pnl:+2.00 },
+  { id:28, dateKey:'2026-5-20', dateDisp:'May 20', play:'VGK ML',     sport:'NHL', units:1, odds:+145, result:'win',  score:'VGK 4–2 COL',   pnl:+1.45 },
 ];
 
+// ── SPORT SPLIT — computed dynamically ──
+const sportDefs = [
+  { key:'MLB', emoji:'⚾' },
+  { key:'NBA', emoji:'🏀' },
+  { key:'NHL', emoji:'🏒' },
+  { key:'NFL', emoji:'🏈' },
+];
+function buildSportSplit() {
+  const container = document.getElementById('sportSplitContainer');
+  const map = {};
+  plays.forEach(p => {
+    if(!map[p.sport]) map[p.sport] = {plays:0, wins:0, losses:0, pnl:0, units:0};
+    map[p.sport].plays++;
+    map[p.sport].units += p.units;
+    map[p.sport].pnl += p.pnl;
+    if(p.result==='win') map[p.sport].wins++;
+    else map[p.sport].losses++;
+  });
+  container.innerHTML = sportDefs.map(s => {
+    const d = map[s.key];
+    let valHtml;
+    if(s.key === 'NFL') {
+      valHtml = `<span class="split-val" style="color:var(--text3)">Off-season</span>`;
+    } else if(!d) {
+      valHtml = `<span class="split-val" style="color:var(--text3)">0 plays</span>`;
+    } else {
+      const net = d.pnl >= 0 ? '+'+d.pnl.toFixed(2)+'u' : d.pnl.toFixed(2)+'u';
+      const col = d.pnl >= 0 ? 'var(--green)' : 'var(--red)';
+      valHtml = `<span class="split-val" style="color:${col}">${d.plays} play${d.plays!==1?'s':''} &nbsp;·&nbsp; ${d.wins}W–${d.losses}L &nbsp;·&nbsp; ${net}</span>`;
+    }
+    return `<div class="split-row"><span class="split-label">${s.emoji} ${s.key}</span>${valHtml}</div>`;
+  }).join('');
+}
+buildSportSplit();
+
 // ── PLAY TABLE ──
+const sportBadgeClass = { MLB:'sport-mlb', NHL:'sport-nhl', NBA:'sport-nba', NFL:'sport-nfl' };
 function renderTable(filter='all') {
   const tbody = document.getElementById('playTableBody');
-  const filtered = plays.filter(p => filter==='win' ? p.result==='win' : filter==='loss' ? p.result==='loss' : true);
+  const filtered = plays.filter(p => {
+    if(filter==='win') return p.result==='win';
+    if(filter==='loss') return p.result==='loss';
+    if(['MLB','NHL','NBA','NFL'].includes(filter)) return p.sport===filter;
+    return true;
+  });
   tbody.innerHTML = [...filtered].reverse().map(p => {
     const rc = p.result==='win' ? 'result-win' : 'result-loss';
     const rt = p.result==='win' ? 'WIN' : 'LOSS';
@@ -420,10 +448,12 @@ function renderTable(filter='all') {
     const pc = p.pnl>=0 ? 'var(--green)' : 'var(--red)';
     const ps = (p.pnl>=0?'+':'') + p.pnl.toFixed(2) + 'u';
     const os = p.odds>0 ? '+'+p.odds : p.odds;
+    const sc = sportBadgeClass[p.sport] || '';
     return `<tr>
       <td class="dim">${p.id}</td>
       <td>${p.dateDisp}</td>
       <td><strong>${p.play}</strong></td>
+      <td><span class="sport-badge ${sc}">${p.sport}</span></td>
       <td><span class="unit-badge ${uc}">${p.units}u</span></td>
       <td class="dim" style="font-family:'DM Mono',monospace;">${os}</td>
       <td><span class="result-badge ${rc}">${rt}</span></td>
@@ -439,9 +469,10 @@ function filterTable(f,btn) {
 }
 renderTable();
 
-// ── CUMULATIVE CHART (no X labels, no X axis) ──
+// ── CUMULATIVE CHART ──
 const cumData=[];let running=0;
 plays.forEach(p=>{running+=p.pnl;cumData.push(+running.toFixed(2));});
+
 new Chart(document.getElementById('cumulativeChart').getContext('2d'),{
   type:'line',
   data:{
@@ -479,16 +510,13 @@ new Chart(document.getElementById('cumulativeChart').getContext('2d'),{
   }
 });
 
-// ── DAILY BAR CHART — last 7 calendar days, newest at right ──
+// ── DAILY BAR CHART ──
 function buildDailyChart() {
-  // Build a map of dateKey -> net pnl
   const dm = {};
   plays.forEach(p => {
     if(!dm[p.dateKey]) dm[p.dateKey] = 0;
     dm[p.dateKey] += p.pnl;
   });
-
-  // Generate last 7 calendar days ending yesterday
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate()-1);
@@ -501,10 +529,8 @@ function buildDailyChart() {
     const val = dm[key] !== undefined ? +dm[key].toFixed(2) : null;
     last7.push({label, val, key});
   }
-
   const labels = last7.map(d=>d.label);
   const vals   = last7.map(d=>d.val);
-
   new Chart(document.getElementById('dailyChart').getContext('2d'),{
     type:'bar',
     data:{
@@ -521,9 +547,7 @@ function buildDailyChart() {
       plugins:{legend:{display:false},tooltip:{
         backgroundColor:'#1a1a1a',borderColor:'#333',borderWidth:1,
         bodyColor:'#f0f0f0',
-        callbacks:{
-          label:ctx=>ctx.raw===null?' No plays':(` ${ctx.raw>0?'+':''}${ctx.raw}u`)
-        }
+        callbacks:{label:ctx=>ctx.raw===null?' No plays':(` ${ctx.raw>0?'+':''}${ctx.raw}u`)}
       }},
       scales:{
         x:{grid:{display:false},ticks:{color:'#555',font:{size:10}}},
@@ -535,7 +559,6 @@ function buildDailyChart() {
 buildDailyChart();
 
 // ── CALENDAR ──
-// Build a map: 'YYYY-M-D' -> {pnl, wins, losses}
 const calData = {};
 plays.forEach(p => {
   if(!calData[p.dateKey]) calData[p.dateKey] = {pnl:0, wins:0, losses:0};
@@ -544,47 +567,33 @@ plays.forEach(p => {
   else calData[p.dateKey].losses++;
 });
 
-let calYear = 2026, calMonth = 4; // 0-indexed: 4 = May
+let calYear = 2026, calMonth = 4;
 
 function renderCalendar() {
   const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   document.getElementById('calLabel').textContent = `${monthNames[calMonth]} ${calYear}`;
-
   const grid = document.getElementById('calGrid');
   grid.innerHTML = '';
-
-  const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
   const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
   const today = new Date();
-
-  // Empty cells before first day
   for(let i=0;i<firstDay;i++) {
     const cell = document.createElement('div');
     cell.className = 'cal-cell empty';
     grid.appendChild(cell);
   }
-
-  // Day cells
   for(let d=1;d<=daysInMonth;d++) {
     const key = `${calYear}-${calMonth+1}-${d}`;
     const data = calData[key];
     const cell = document.createElement('div');
-
     let cls = 'cal-cell';
     if(today.getFullYear()===calYear && today.getMonth()===calMonth && today.getDate()===d) cls+=' today';
-
-    if(data) {
-      if(data.pnl>=0) cls+=' has-win';
-      else cls+=' has-loss';
-    }
-
+    if(data) { if(data.pnl>=0) cls+=' has-win'; else cls+=' has-loss'; }
     cell.className = cls;
-
     const dayNum = document.createElement('div');
     dayNum.className = 'cal-day-num';
     dayNum.textContent = d;
     cell.appendChild(dayNum);
-
     if(data) {
       const pnlEl = document.createElement('div');
       pnlEl.className = 'cal-pnl';
@@ -593,22 +602,11 @@ function renderCalendar() {
       pnlEl.style.color = net>=0 ? 'var(--green)' : 'var(--red)';
       cell.appendChild(pnlEl);
     }
-
     grid.appendChild(cell);
   }
 }
-
-function calPrev() {
-  calMonth--;
-  if(calMonth<0){calMonth=11;calYear--;}
-  renderCalendar();
-}
-function calNext() {
-  calMonth++;
-  if(calMonth>11){calMonth=0;calYear++;}
-  renderCalendar();
-}
-
+function calPrev() { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); }
+function calNext() { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); }
 renderCalendar();
 
 // ── TAB SWITCH ──
