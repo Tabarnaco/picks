@@ -12,25 +12,79 @@
     --text:#f0f0f0; --text2:#888888; --text3:#555555;
     --green:#00e676; --green-dim:rgba(0,230,118,0.08);
     --red:#ff5252; --red-dim:rgba(255,82,82,0.08);
-    --amber:#ffab40; --radius:10px;
+    --amber:#ffab40; --blue:#3b82f6; --blue-dim:rgba(59,130,246,0.08);
+    --radius:10px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;min-height:100vh;}
+
+  /* ── HEADER ── */
   header{border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);z-index:100;}
   .logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;color:var(--green);}
   .logo span{color:var(--text2);font-size:13px;font-family:'DM Sans',sans-serif;letter-spacing:.05em;margin-left:10px;font-weight:400;}
   .live-badge{display:flex;align-items:center;gap:6px;background:var(--green-dim);border:1px solid rgba(0,230,118,0.2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--green);letter-spacing:.06em;text-transform:uppercase;}
   .live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
   main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+
+  /* ── VERIFIED RECORD BANNER ── */
+  .verified-banner{background:linear-gradient(135deg,rgba(0,230,118,0.06) 0%,rgba(0,230,118,0.02) 100%);border:1px solid rgba(0,230,118,0.25);border-radius:var(--radius);padding:1.2rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+  .verified-left{display:flex;align-items:center;gap:12px;}
+  .verified-icon{width:36px;height:36px;background:rgba(0,230,118,0.12);border:1px solid rgba(0,230,118,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .verified-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;color:var(--green);margin-bottom:2px;}
+  .verified-sub{font-size:11.5px;color:var(--text2);line-height:1.5;}
+  .verified-sub span{color:var(--green);font-weight:600;}
+  .verified-stats{display:flex;gap:2rem;flex-wrap:wrap;}
+  .vstat{text-align:center;}
+  .vstat-val{font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:var(--green);line-height:1;}
+  .vstat-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;}
+
+  /* ── FREE PLAY SECTION ── */
+  .free-play-section{margin-bottom:2rem;}
+  .free-play-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px;}
+  .free-play-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;color:var(--text);}
+  .free-tag{background:var(--green-dim);border:1px solid rgba(0,230,118,0.3);border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:var(--green);letter-spacing:.05em;text-transform:uppercase;}
+  .free-card{background:var(--bg2);border:1px solid rgba(0,230,118,0.2);border-radius:var(--radius);padding:1.4rem 1.5rem;position:relative;overflow:hidden;}
+  .free-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);}
+  .free-card-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .free-play-info{}
+  .free-play-meta{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:6px;}
+  .free-play-pick{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.08em;color:var(--text);line-height:1;margin-bottom:4px;}
+  .free-play-line{font-size:13px;color:var(--text2);margin-bottom:8px;}
+  .free-play-reason{font-size:12.5px;color:var(--text);line-height:1.6;max-width:500px;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--green);}
+  .free-play-right{text-align:right;flex-shrink:0;}
+  .free-odds{font-family:'DM Mono',monospace;font-size:32px;font-weight:500;color:var(--green);line-height:1;margin-bottom:6px;}
+  .free-timestamp{font-size:10px;color:var(--text3);margin-bottom:10px;}
+  .free-timestamp span{color:var(--amber);font-weight:600;}
+  .free-result-badge{display:inline-block;padding:4px 14px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:.06em;}
+  .free-result-win{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,230,118,0.3);}
+  .free-result-loss{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,82,82,0.3);}
+  .free-result-pending{background:rgba(255,171,64,0.08);color:var(--amber);border:1px solid rgba(255,171,64,0.3);}
+  .free-locked{display:flex;align-items:center;gap:10px;padding:1rem;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.15);border-radius:8px;margin-top:10px;}
+  .free-locked-text{font-size:12px;color:var(--text2);line-height:1.5;}
+  .free-locked-text b{color:var(--blue);}
+
+  /* ── FREE PLAY RECORD ── */
+  .free-record-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:1rem;}
+  .free-stat{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.7rem .8rem;text-align:center;}
+  .free-stat-val{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--text);line-height:1;margin-bottom:3px;}
+  .free-stat-val.g{color:var(--green);}
+  .free-stat-label{font-size:9.5px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;}
+
+  /* ── PAGE TITLE ── */
   .page-title-block{margin-bottom:2rem;}
   .page-title-block h1{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:.08em;color:var(--text);line-height:1;margin-bottom:6px;}
   .page-title-block p{font-size:13px;color:var(--text2);}
   .page-title-block p span{color:var(--green);font-weight:600;}
+
+  /* ── TABS ── */
   .tabs{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:4px;margin-bottom:2rem;width:fit-content;}
   .tab{padding:7px 18px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;color:var(--text2);transition:all .2s;border:none;background:transparent;}
   .tab.active{background:var(--bg3);color:var(--text);border:1px solid var(--border2);}
   .tab:hover:not(.active){color:var(--text);}
+
+  /* ── KPI GRID ── */
   .kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:2rem;}
   @media(max-width:900px){.kpi-grid{grid-template-columns:repeat(3,1fr);}}
   @media(max-width:500px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
@@ -43,14 +97,26 @@
   .kpi-value.green{color:var(--green);}
   .kpi-value.amber{color:var(--amber);}
   .kpi-sub{font-size:11px;color:var(--text3);}
+
+  /* ── CHARTS ── */
   .chart-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:2rem;}
   .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;}
   .section-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.1em;color:var(--text);}
   .section-sub{font-size:11px;color:var(--text2);}
   .chart-container{position:relative;height:180px;}
   canvas{width:100%!important;}
+
+  /* ── BOTTOM GRID ── */
   .bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:2rem;}
   @media(max-width:700px){.bottom-grid{grid-template-columns:1fr;}}
+  .split-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;}
+  .split-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;color:var(--text);margin-bottom:1rem;}
+  .split-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+  .split-row:last-child{border-bottom:none;}
+  .split-label{color:var(--text2);}
+  .split-val{font-family:'DM Mono',monospace;font-weight:600;font-size:15px;}
+
+  /* ── PLAY LOG TABLE ── */
   .table-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;}
   .table-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
   .filter-pills{display:flex;gap:6px;flex-wrap:wrap;}
@@ -77,12 +143,8 @@
   .sport-nhl{background:rgba(99,179,237,.1);color:#63b3ed;}
   .sport-nba{background:rgba(255,171,64,.1);color:var(--amber);}
   .sport-nfl{background:rgba(154,117,234,.1);color:#9a75ea;}
-  .split-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;}
-  .split-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;color:var(--text);margin-bottom:1rem;}
-  .split-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
-  .split-row:last-child{border-bottom:none;}
-  .split-label{color:var(--text2);}
-  .split-val{font-family:'DM Mono',monospace;font-weight:600;font-size:15px;}
+
+  /* ── CALENDAR ── */
   .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
   .cal-nav-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);border-radius:6px;padding:5px 14px;cursor:pointer;font-size:16px;font-weight:700;transition:all .2s;}
   .cal-nav-btn:hover{color:var(--text);border-color:var(--text3);}
@@ -96,6 +158,7 @@
   .cal-cell.has-win .cal-day-num{color:var(--green);}
   .cal-cell.has-loss .cal-day-num{color:var(--red);}
   .cal-pnl{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;}
+
   .disclaimer{text-align:center;font-size:11px;color:var(--text3);padding-top:1rem;line-height:1.6;}
   .disclaimer a{color:var(--text2);}
   .view{display:none;}
@@ -103,15 +166,99 @@
 </style>
 </head>
 <body>
+
 <header>
   <div class="logo">THE MODEL <span>Performance Dashboard</span></div>
   <div class="live-badge"><div class="live-dot"></div> Live Tracking</div>
 </header>
+
 <main>
+
+  <!-- ══════════════════════════════════════════════
+       VERIFIED RECORD BANNER
+  ══════════════════════════════════════════════ -->
+  <div class="verified-banner">
+    <div class="verified-left">
+      <div class="verified-icon">✓</div>
+      <div>
+        <div class="verified-title">Verified Public Record</div>
+        <div class="verified-sub">
+          Every play tracked since <span>May 7, 2026</span> — wins and losses both public.<br>
+          Nothing deleted. Nothing edited. Every card timestamped before first pitch.
+        </div>
+      </div>
+    </div>
+    <div class="verified-stats">
+      <div class="vstat"><div class="vstat-val" id="vb-plays">29</div><div class="vstat-label">Plays</div></div>
+      <div class="vstat"><div class="vstat-val" id="vb-record">19–10</div><div class="vstat-label">Record</div></div>
+      <div class="vstat"><div class="vstat-val" id="vb-roi">+31.4%</div><div class="vstat-label">ROI</div></div>
+      <div class="vstat"><div class="vstat-val" id="vb-days">16d</div><div class="vstat-label">Tracking</div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FREE PLAY OF THE DAY
+  ══════════════════════════════════════════════ -->
+  <div class="free-play-section">
+    <div class="free-play-header">
+      <div class="free-play-title">Free Play of the Day</div>
+      <div class="free-tag">✓ Free — No signup required</div>
+    </div>
+
+    <div class="free-card">
+      <div class="free-card-inner">
+        <div class="free-play-info">
+          <div class="free-play-meta">Today · Friday May 22, 2026 · MLB</div>
+          <div class="free-play-pick">Toronto Blue Jays -1</div>
+          <div class="free-play-line">PIT @ TOR · Rogers Centre · 7:07 PM ET · -115</div>
+          <div class="free-play-reason">
+            Gausman in dominant form (93rd percentile contact suppression) against Chandler who is 1-5 with a 5.14 ERA and has walked 4+ batters in 5 of 9 starts this season.
+          </div>
+        </div>
+        <div class="free-play-right">
+          <div class="free-odds">-115</div>
+          <div class="free-timestamp">Posted <span id="postTime"></span></div>
+          <div class="free-result-badge free-result-pending">PENDING</div>
+        </div>
+      </div>
+      <div class="free-locked">
+        <div style="font-size:18px;">🔒</div>
+        <div class="free-locked-text">
+          <b>Want the full card?</b> Today's model has 3 plays including a Plus Money Unlock on ATL and a K prop on Gausman.
+          Full analysis, case against, unit sizing, and every play — coming soon for members.
+        </div>
+      </div>
+    </div>
+
+    <!-- Free play record -->
+    <div class="free-record-grid">
+      <div class="free-stat">
+        <div class="free-stat-val" id="fp-plays">1</div>
+        <div class="free-stat-label">Free Plays</div>
+      </div>
+      <div class="free-stat">
+        <div class="free-stat-val" id="fp-record">0–0</div>
+        <div class="free-stat-label">Record</div>
+      </div>
+      <div class="free-stat">
+        <div class="free-stat-val g" id="fp-units">0.00u</div>
+        <div class="free-stat-label">Net Units</div>
+      </div>
+      <div class="free-stat">
+        <div class="free-stat-val g" id="fp-roi">—</div>
+        <div class="free-stat-label">ROI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FULL RECORD — PAGE TITLE + TABS
+  ══════════════════════════════════════════════ -->
   <div class="page-title-block">
-    <h1>Performance Dashboard</h1>
+    <h1>Full Performance Record</h1>
     <p>Model tracking since <span>May 7, 2026</span> · Unit-based results · All plays equally weighted · Last updated <span id="lastUpdate"></span></p>
   </div>
+
   <div class="tabs">
     <button class="tab active" onclick="switchView('alltime',event)">All Time</button>
     <button class="tab" onclick="switchView('monthly',event)">By Month</button>
@@ -166,7 +313,7 @@
         <span class="cal-month-label" id="calLabel"></span>
         <button class="cal-nav-btn" onclick="calNext()">&#8594;</button>
       </div>
-      <div class="cal-grid" id="calDow">
+      <div class="cal-grid">
         <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div>
         <div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
       </div>
@@ -207,8 +354,8 @@
   <!-- PLAY LOG -->
   <div class="table-section">
     <div class="table-header">
-      <div><div class="section-title" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.1em;">Play Log</div>
-      <div style="font-size:11px;color:var(--text2);margin-top:3px;">All 29 settled plays</div></div>
+      <div><div class="section-title" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.1em;">Full Play Log</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:3px;">All 29 settled plays · every result public</div></div>
       <div class="filter-pills">
         <button class="pill active" onclick="filterTable('all',this)">All</button>
         <button class="pill" onclick="filterTable('win',this)">Wins</button>
@@ -223,13 +370,28 @@
       <tbody id="playTableBody"></tbody></table>
     </div>
   </div>
-  <div class="disclaimer">Past performance is not indicative of future results. For entertainment and tracking purposes only.<br>Gamble responsibly · <a href="#">1-800-GAMBLER</a></div>
+
+  <div class="disclaimer">
+    Past performance is not indicative of future results. For entertainment and tracking purposes only.<br>
+    Gamble responsibly · <a href="#">1-800-GAMBLER</a>
+  </div>
+
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 
+// ── TIMESTAMP ──
+const now = new Date();
+document.getElementById('lastUpdate').textContent = now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+document.getElementById('postTime').textContent = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
+
+// ── VERIFIED BANNER DAYS TRACKING ──
+const startDate = new Date('2026-05-07');
+const daysDiff = Math.floor((now - startDate)/(1000*60*60*24));
+document.getElementById('vb-days').textContent = daysDiff + 'd';
+
+// ── PLAY DATA ──
 const plays = [
   { id:1,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'PIT ML',     sport:'MLB', units:1, odds:-115, result:'win',  score:'PIT 4–2 ARI',   pnl:+0.87 },
   { id:2,  dateKey:'2026-5-7',  dateDisp:'May 7',  play:'TB ML',      sport:'MLB', units:2, odds:+102, result:'win',  score:'TB 8–4 BOS',    pnl:+2.04 },
@@ -262,14 +424,31 @@ const plays = [
   { id:29, dateKey:'2026-5-21', dateDisp:'May 21', play:'CLE +6.5',   sport:'NBA', units:1, odds:-115, result:'loss', score:'NYK 109–93',    pnl:-1.00 },
 ];
 
-// Sport split — fully dynamic
+// ── FREE PLAY HISTORY (separate record) ──
+const freePlays = [
+  // { date:'May 22', play:'TOR -1', odds:-115, result:'pending', pnl:0 }
+  // Results added here as they settle
+];
+function buildFreeRecord() {
+  const wins = freePlays.filter(p=>p.result==='win').length;
+  const losses = freePlays.filter(p=>p.result==='loss').length;
+  const net = freePlays.reduce((s,p)=>s+p.pnl,0);
+  const risked = freePlays.filter(p=>p.result!=='pending').length;
+  document.getElementById('fp-plays').textContent = freePlays.length + 1; // +1 for today pending
+  document.getElementById('fp-record').textContent = wins + 'W–' + losses + 'L';
+  document.getElementById('fp-units').textContent = (net>=0?'+':'') + net.toFixed(2) + 'u';
+  document.getElementById('fp-roi').textContent = risked > 0 ? (net/risked*100).toFixed(1)+'%' : '—';
+}
+buildFreeRecord();
+
+// ── SPORT SPLIT ──
 const sportDefs = [{key:'MLB',emoji:'⚾'},{key:'NBA',emoji:'🏀'},{key:'NHL',emoji:'🏒'},{key:'NFL',emoji:'🏈'}];
 function buildSportSplit() {
   const container = document.getElementById('sportSplitContainer');
   const map = {};
   plays.forEach(p => {
-    if(!map[p.sport]) map[p.sport] = {plays:0,wins:0,losses:0,pnl:0,units:0};
-    map[p.sport].plays++; map[p.sport].units+=p.units; map[p.sport].pnl+=p.pnl;
+    if(!map[p.sport]) map[p.sport]={plays:0,wins:0,losses:0,pnl:0};
+    map[p.sport].plays++; map[p.sport].pnl+=p.pnl;
     if(p.result==='win') map[p.sport].wins++; else map[p.sport].losses++;
   });
   container.innerHTML = sportDefs.map(s => {
@@ -278,8 +457,8 @@ function buildSportSplit() {
     if(s.key==='NFL') { valHtml=`<span class="split-val" style="color:var(--text3)">Off-season</span>`; }
     else if(!d) { valHtml=`<span class="split-val" style="color:var(--text3)">0 plays</span>`; }
     else {
-      const net = d.pnl>=0?'+'+d.pnl.toFixed(2)+'u':d.pnl.toFixed(2)+'u';
-      const col = d.pnl>=0?'var(--green)':'var(--red)';
+      const net=d.pnl>=0?'+'+d.pnl.toFixed(2)+'u':d.pnl.toFixed(2)+'u';
+      const col=d.pnl>=0?'var(--green)':'var(--red)';
       valHtml=`<span class="split-val" style="color:${col}">${d.plays} play${d.plays!==1?'s':''} · ${d.wins}W–${d.losses}L · ${net}</span>`;
     }
     return `<div class="split-row"><span class="split-label">${s.emoji} ${s.key}</span>${valHtml}</div>`;
@@ -287,17 +466,17 @@ function buildSportSplit() {
 }
 buildSportSplit();
 
-// Play table
-const sportBadgeClass = {MLB:'sport-mlb',NHL:'sport-nhl',NBA:'sport-nba',NFL:'sport-nfl'};
-function renderTable(filter='all') {
-  const tbody = document.getElementById('playTableBody');
-  const filtered = plays.filter(p => {
+// ── PLAY TABLE ──
+const sportBadgeClass={MLB:'sport-mlb',NHL:'sport-nhl',NBA:'sport-nba',NFL:'sport-nfl'};
+function renderTable(filter='all'){
+  const tbody=document.getElementById('playTableBody');
+  const filtered=plays.filter(p=>{
     if(filter==='win') return p.result==='win';
     if(filter==='loss') return p.result==='loss';
     if(['MLB','NHL','NBA','NFL'].includes(filter)) return p.sport===filter;
     return true;
   });
-  tbody.innerHTML = [...filtered].reverse().map(p => {
+  tbody.innerHTML=[...filtered].reverse().map(p=>{
     const rc=p.result==='win'?'result-win':'result-loss';
     const rt=p.result==='win'?'WIN':'LOSS';
     const uc=p.units===1?'u1':p.units===2?'u2':'u3';
@@ -320,7 +499,7 @@ function renderTable(filter='all') {
 function filterTable(f,btn){document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');renderTable(f);}
 renderTable();
 
-// Cumulative chart
+// ── CUMULATIVE CHART ──
 const cumData=[];let running=0;
 plays.forEach(p=>{running+=p.pnl;cumData.push(+running.toFixed(2));});
 new Chart(document.getElementById('cumulativeChart').getContext('2d'),{
@@ -332,20 +511,21 @@ new Chart(document.getElementById('cumulativeChart').getContext('2d'),{
     tension:0.4}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
     tooltip:{backgroundColor:'#1a1a1a',borderColor:'#333',borderWidth:1,titleColor:'#555',bodyColor:'#f0f0f0',
-    callbacks:{title:items=>`Play #${items[0].label}`,label:ctx=>` ${ctx.raw>0?'+':''}${ctx.raw}u`}}},
+    callbacks:{title:i=>`Play #${i[0].label}`,label:ctx=>` ${ctx.raw>0?'+':''}${ctx.raw}u`}}},
     scales:{x:{display:false},y:{grid:{color:'#1a1a1a'},border:{display:false},
     ticks:{color:'#555',font:{family:'DM Mono',size:10},callback:v=>(v>0?'+':'')+v+'u'}}}}
 });
 
-// Daily bar chart
+// ── DAILY BAR — last 7 days ending YESTERDAY (today always empty until settled) ──
 function buildDailyChart(){
   const dm={};plays.forEach(p=>{if(!dm[p.dateKey])dm[p.dateKey]=0;dm[p.dateKey]+=p.pnl;});
-  const today=new Date();const last7=[];
-  for(let i=6;i>=0;i--){const d=new Date(today);d.setDate(today.getDate()-i);
+  const yesterday=new Date(now);yesterday.setDate(now.getDate()-1);
+  const last7=[];
+  for(let i=6;i>=0;i--){const d=new Date(yesterday);d.setDate(yesterday.getDate()-i);
     const key=`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
     const label=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
     last7.push({label,val:dm[key]!==undefined?+dm[key].toFixed(2):null});}
-  const labels=last7.map(d=>d.label);const vals=last7.map(d=>d.val);
+  const labels=last7.map(d=>d.label),vals=last7.map(d=>d.val);
   new Chart(document.getElementById('dailyChart').getContext('2d'),{type:'bar',
     data:{labels,datasets:[{data:vals,
       backgroundColor:vals.map(v=>v===null?'transparent':v>=0?'rgba(0,230,118,0.7)':'rgba(255,82,82,0.7)'),
@@ -360,30 +540,29 @@ function buildDailyChart(){
 }
 buildDailyChart();
 
-// Calendar
+// ── CALENDAR ──
 const calData={};
 plays.forEach(p=>{if(!calData[p.dateKey])calData[p.dateKey]={pnl:0,wins:0,losses:0};
   calData[p.dateKey].pnl+=p.pnl;if(p.result==='win')calData[p.dateKey].wins++;else calData[p.dateKey].losses++;});
 let calYear=2026,calMonth=4;
 function renderCalendar(){
-  const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('calLabel').textContent=`${monthNames[calMonth]} ${calYear}`;
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calLabel').textContent=`${months[calMonth]} ${calYear}`;
   const grid=document.getElementById('calGrid');grid.innerHTML='';
   const firstDay=new Date(calYear,calMonth,1).getDay();
   const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
-  const today=new Date();
   for(let i=0;i<firstDay;i++){const c=document.createElement('div');c.className='cal-cell empty';grid.appendChild(c);}
   for(let d=1;d<=daysInMonth;d++){
     const key=`${calYear}-${calMonth+1}-${d}`;const data=calData[key];
     const cell=document.createElement('div');
     let cls='cal-cell';
-    if(today.getFullYear()===calYear&&today.getMonth()===calMonth&&today.getDate()===d)cls+=' today';
-    if(data){if(data.pnl>=0)cls+=' has-win';else cls+=' has-loss';}
+    if(now.getFullYear()===calYear&&now.getMonth()===calMonth&&now.getDate()===d)cls+=' today';
+    if(data){cls+=data.pnl>=0?' has-win':' has-loss';}
     cell.className=cls;
-    const dayNum=document.createElement('div');dayNum.className='cal-day-num';dayNum.textContent=d;cell.appendChild(dayNum);
-    if(data){const pnlEl=document.createElement('div');pnlEl.className='cal-pnl';
-      const net=+data.pnl.toFixed(2);pnlEl.textContent=(net>=0?'+':'')+net+'u';
-      pnlEl.style.color=net>=0?'var(--green)':'var(--red)';cell.appendChild(pnlEl);}
+    const dn=document.createElement('div');dn.className='cal-day-num';dn.textContent=d;cell.appendChild(dn);
+    if(data){const pe=document.createElement('div');pe.className='cal-pnl';
+      const net=+data.pnl.toFixed(2);pe.textContent=(net>=0?'+':'')+net+'u';
+      pe.style.color=net>=0?'var(--green)':'var(--red)';cell.appendChild(pe);}
     grid.appendChild(cell);}
 }
 function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
