@@ -431,15 +431,14 @@ const plays = [
 
 // ── FREE PLAY HISTORY (separate record) ──
 const freePlays = [
-  // { date:'May 22', play:'TOR -1', odds:-115, result:'pending', pnl:0 }
-  // Results added here as they settle
+  { date:'May 22', play:'TOR -1', odds:-115, result:'win', pnl:+0.87 },
 ];
 function buildFreeRecord() {
   const wins = freePlays.filter(p=>p.result==='win').length;
   const losses = freePlays.filter(p=>p.result==='loss').length;
   const net = freePlays.reduce((s,p)=>s+p.pnl,0);
   const risked = freePlays.filter(p=>p.result!=='pending').length;
-  document.getElementById('fp-plays').textContent = freePlays.length + 1; // +1 for today pending
+  document.getElementById('fp-plays').textContent = freePlays.length;
   document.getElementById('fp-record').textContent = wins + 'W–' + losses + 'L';
   document.getElementById('fp-units').textContent = (net>=0?'+':'') + net.toFixed(2) + 'u';
   document.getElementById('fp-roi').textContent = risked > 0 ? (net/risked*100).toFixed(1)+'%' : '—';
