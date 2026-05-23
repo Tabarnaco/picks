@@ -231,22 +231,18 @@
     </div>
 
     <!-- Free play record -->
-    <div class="free-record-grid">
+    <div class="free-record-grid" style="grid-template-columns:repeat(3,1fr);">
       <div class="free-stat">
-        <div class="free-stat-val" id="fp-plays">1</div>
+        <div class="free-stat-val g" id="fp-plays">1</div>
         <div class="free-stat-label">Free Plays</div>
       </div>
       <div class="free-stat">
-        <div class="free-stat-val" id="fp-record">0–0</div>
+        <div class="free-stat-val g" id="fp-record">0–0</div>
         <div class="free-stat-label">Record</div>
       </div>
       <div class="free-stat">
         <div class="free-stat-val g" id="fp-units">—</div>
         <div class="free-stat-label">Win Rate</div>
-      </div>
-      <div class="free-stat">
-        <div class="free-stat-val g" id="fp-roi">—</div>
-        <div class="free-stat-label">Record</div>
       </div>
     </div>
   </div>
@@ -442,7 +438,6 @@ function buildFreeRecord() {
   document.getElementById('fp-record').textContent = wins + 'W–' + losses + 'L';
   const wr = risked > 0 ? ((wins/risked)*100).toFixed(1)+'%' : '—';
   document.getElementById('fp-units').textContent = wr;
-  document.getElementById('fp-roi').textContent = wins + 'W–' + losses + 'L';
 }
 buildFreeRecord();
 
