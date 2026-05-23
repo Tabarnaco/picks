@@ -241,12 +241,12 @@
         <div class="free-stat-label">Record</div>
       </div>
       <div class="free-stat">
-        <div class="free-stat-val g" id="fp-units">0.00u</div>
-        <div class="free-stat-label">Net Units</div>
+        <div class="free-stat-val g" id="fp-units">—</div>
+        <div class="free-stat-label">Win Rate</div>
       </div>
       <div class="free-stat">
         <div class="free-stat-val g" id="fp-roi">—</div>
-        <div class="free-stat-label">ROI</div>
+        <div class="free-stat-label">Record</div>
       </div>
     </div>
   </div>
@@ -440,8 +440,9 @@ function buildFreeRecord() {
   const risked = freePlays.filter(p=>p.result!=='pending').length;
   document.getElementById('fp-plays').textContent = freePlays.length;
   document.getElementById('fp-record').textContent = wins + 'W–' + losses + 'L';
-  document.getElementById('fp-units').textContent = (net>=0?'+':'') + net.toFixed(2) + 'u';
-  document.getElementById('fp-roi').textContent = risked > 0 ? (net/risked*100).toFixed(1)+'%' : '—';
+  const wr = risked > 0 ? ((wins/risked)*100).toFixed(1)+'%' : '—';
+  document.getElementById('fp-units').textContent = wr;
+  document.getElementById('fp-roi').textContent = wins + 'W–' + losses + 'L';
 }
 buildFreeRecord();
 
