@@ -191,7 +191,7 @@
     <div class="verified-stats">
       <div class="vstat"><div class="vstat-val" id="vb-plays">34</div><div class="vstat-label">Plays</div></div>
       <div class="vstat"><div class="vstat-val" id="vb-record">21–13</div><div class="vstat-label">Record</div></div>
-      <div class="vstat"><div class="vstat-val" id="vb-roi">+24.3%</div><div class="vstat-label">ROI</div></div>
+      <div class="vstat"><div class="vstat-val" id="vb-roi">+29.4%</div><div class="vstat-label">ROI</div></div>
       <div class="vstat"><div class="vstat-val" id="vb-days">16d</div><div class="vstat-label">Tracking</div></div>
     </div>
   </div>
@@ -264,12 +264,12 @@
   <!-- ALL TIME -->
   <div class="view active" id="view-alltime">
     <div class="kpi-grid">
-      <div class="kpi-card highlight"><div class="kpi-label">Net Units</div><div class="kpi-value green">+16.34u</div><div class="kpi-sub">All time</div></div>
-      <div class="kpi-card highlight"><div class="kpi-label">ROI</div><div class="kpi-value green">+31.4%</div><div class="kpi-sub">Units risked basis</div></div>
-      <div class="kpi-card"><div class="kpi-label">Record</div><div class="kpi-value">19–10</div><div class="kpi-sub">29 plays settled</div></div>
-      <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value">65.5%</div><div class="kpi-sub">Breakeven = 52.4%</div></div>
-      <div class="kpi-card"><div class="kpi-label">Units Risked</div><div class="kpi-value">52u</div><div class="kpi-sub">Total wagered</div></div>
-      <div class="kpi-card highlight2"><div class="kpi-label">Avg Odds</div><div class="kpi-value">-109</div><div class="kpi-sub">Blended line</div></div>
+      <div class="kpi-card highlight"><div class="kpi-label">Net Units</div><div class="kpi-value green" id="stat-net">—</div><div class="kpi-sub">All time</div></div>
+      <div class="kpi-card highlight"><div class="kpi-label">ROI</div><div class="kpi-value green" id="stat-roi">—</div><div class="kpi-sub">Units risked basis</div></div>
+      <div class="kpi-card"><div class="kpi-label">Record</div><div class="kpi-value" id="stat-record">—</div><div class="kpi-sub" id="stat-plays">—</div></div>
+      <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value" id="stat-wr">—</div><div class="kpi-sub">Breakeven = 52.4%</div></div>
+      <div class="kpi-card"><div class="kpi-label">Units Risked</div><div class="kpi-value" id="stat-risked">—</div><div class="kpi-sub">Total wagered</div></div>
+      <div class="kpi-card highlight2"><div class="kpi-label">Avg Odds</div><div class="kpi-value" id="stat-avgodds">—</div><div class="kpi-sub">Blended line</div></div>
     </div>
     <div class="chart-section">
       <div class="section-header"><div><div class="section-title">Cumulative Unit P&L</div><div class="section-sub">Running total after each settled play</div></div></div>
@@ -278,14 +278,10 @@
     <div class="bottom-grid">
       <div class="split-card">
         <div class="split-title">ROI By Unit Size</div>
-        <div class="split-row"><span class="split-label">1 Unit · 11 plays · 11u</span><span class="split-val" style="color:var(--red)">-9.1%</span></div>
-        <div class="split-row"><span class="split-label">2 Units · 13 plays · 26u</span><span class="split-val" style="color:var(--green)">+50.4%</span></div>
-        <div class="split-row"><span class="split-label">3 Units · 5 plays · 15u</span><span class="split-val" style="color:var(--green)">+50.5%</span></div>
+        <div id="roiByUnit"></div>
         <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
           <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);margin-bottom:.7rem;">Win Rate By Unit Size</div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text2)">1 Unit · 11 plays</span><span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">5W–6L · 45.5%</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text2)">2 Units · 13 plays</span><span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">10W–3L · 76.9%</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;"><span style="color:var(--text2)">3 Units · 5 plays</span><span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">4W–1L · 80.0%</span></div>
+          <div id="wrByUnit"></div>
         </div>
       </div>
       <div class="split-card">
@@ -298,10 +294,10 @@
   <!-- MONTHLY -->
   <div class="view" id="view-monthly">
     <div class="kpi-grid">
-      <div class="kpi-card highlight"><div class="kpi-label">May 2026 Net</div><div class="kpi-value green">+16.34u</div><div class="kpi-sub">Ongoing</div></div>
-      <div class="kpi-card"><div class="kpi-label">May Record</div><div class="kpi-value">19–10</div><div class="kpi-sub">29 plays</div></div>
-      <div class="kpi-card"><div class="kpi-label">May ROI</div><div class="kpi-value green">+31.4%</div><div class="kpi-sub">52u risked</div></div>
-      <div class="kpi-card"><div class="kpi-label">May Win Rate</div><div class="kpi-value">65.5%</div><div class="kpi-sub">—</div></div>
+      <div class="kpi-card highlight"><div class="kpi-label">May 2026 Net</div><div class="kpi-value green" id="may-net">—</div><div class="kpi-sub">Ongoing</div></div>
+      <div class="kpi-card"><div class="kpi-label">May Record</div><div class="kpi-value" id="may-record">—</div><div class="kpi-sub" id="may-plays">—</div></div>
+      <div class="kpi-card"><div class="kpi-label">May ROI</div><div class="kpi-value green" id="may-roi">—</div><div class="kpi-sub" id="may-risked">—</div></div>
+      <div class="kpi-card"><div class="kpi-label">May Win Rate</div><div class="kpi-value" id="may-wr">—</div><div class="kpi-sub">—</div></div>
     </div>
     <div class="chart-section">
       <div class="cal-nav">
@@ -320,9 +316,9 @@
       <table>
         <thead><tr><th>Month</th><th>Plays</th><th>Record</th><th>Win%</th><th>Units Risked</th><th class="r">Net Units</th><th class="r">ROI</th></tr></thead>
         <tbody>
-          <tr><td><strong>May 2026</strong></td><td>29</td><td>19–10</td><td>65.5%</td><td>52u</td>
-          <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;font-weight:500;">+16.34u</td>
-          <td class="r" style="color:var(--green);font-family:'DM Mono',monospace;font-weight:500;">+31.4%</td></tr>
+          <tr id="monthly-row-may"><td><strong>May 2026</strong></td><td id="mr-plays">—</td><td id="mr-record">—</td><td id="mr-wr">—</td><td id="mr-risked">—</td>
+          <td class="r" id="mr-net" style="font-family:'DM Mono',monospace;font-weight:500;">—</td>
+          <td class="r" id="mr-roi" style="font-family:'DM Mono',monospace;font-weight:500;">—</td></tr>
         </tbody>
       </table>
     </div>
@@ -338,11 +334,7 @@
       <div class="section-header"><div class="section-title">Weekly Breakdown</div></div>
       <table>
         <thead><tr><th>Week</th><th>Dates</th><th>Plays</th><th>Record</th><th>Units</th><th class="r">Net</th><th class="r">ROI</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Week 19</strong></td><td class="dim">May 7–10</td><td>7</td><td>6–1</td><td>16u</td><td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+7.58u</td><td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+47.4%</td></tr>
-          <tr><td><strong>Week 20</strong></td><td class="dim">May 11–17</td><td>13</td><td>8–5</td><td>26u</td><td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+4.57u</td><td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+17.6%</td></tr>
-          <tr><td><strong>Week 21</strong></td><td class="dim">May 18–22 (ongoing)</td><td>9</td><td>5W–4L</td><td>10u</td><td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+4.21u</td><td class="r" style="color:var(--green);font-family:'DM Mono',monospace;">+42.1%</td></tr>
-        </tbody>
+        <tbody id="weeklyTableBody"></tbody>
       </table>
     </div>
   </div>
@@ -351,7 +343,7 @@
   <div class="table-section">
     <div class="table-header">
       <div><div class="section-title" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.1em;">Full Play Log</div>
-      <div style="font-size:11px;color:var(--text2);margin-top:3px;">All 29 settled plays · every result public</div></div>
+      <div style="font-size:11px;color:var(--text2);margin-top:3px;" id="playLogHeader">All settled plays · every result public</div></div>
       <div class="filter-pills">
         <button class="pill active" onclick="filterTable('all',this)">All</button>
         <button class="pill" onclick="filterTable('win',this)">Wins</button>
@@ -423,11 +415,20 @@ const plays = [
   { id:33, dateKey:'2026-5-22', dateDisp:'May 22', play:'Gausman K U5.5',sport:'MLB',units:1, odds:+125, result:'loss', score:'8 Ks',          pnl:-1.00 },
   { id:34, dateKey:'2026-5-22', dateDisp:'May 22', play:'LAD/MIL U8.5',sport:'MLB', units:1, odds:-115, result:'win',  score:'MIL 5–LAD 1',  pnl:+0.87 },
   { id:36, dateKey:'2026-5-22', dateDisp:'May 22', play:'Wrobleski K U3.5',sport:'MLB',units:1,odds:+120,result:'loss',score:'4 Ks',          pnl:-1.00 },
+  { id:37, dateKey:'2026-5-23', dateDisp:'May 23', play:'PHI -1.5',       sport:'MLB', units:2, odds:+115, result:'win',  score:'PHI 3–CLE 0',   pnl:+2.30 },
+  { id:38, dateKey:'2026-5-23', dateDisp:'May 23', play:'ATL -1.5',       sport:'MLB', units:1, odds:+105, result:'loss', score:'ATL 0–WSH 2',   pnl:-1.00 },
+  { id:39, dateKey:'2026-5-23', dateDisp:'May 23', play:'CLE -2.5',       sport:'NBA', units:1, odds:-105, result:'loss', score:'CLE 108–NYK 121',pnl:-1.05 },
+  { id:40, dateKey:'2026-5-23', dateDisp:'May 23', play:'CAR -1.5',       sport:'NHL', units:1, odds:+125, result:'loss', score:'CAR 3–MTL 2',   pnl:-1.00 },
+  { id:41, dateKey:'2026-5-24', dateDisp:'May 24', play:'TOR -1',         sport:'MLB', units:1, odds:-115, result:'loss', score:'PIT 4–TOR 1',   pnl:-1.00 },
+  { id:43, dateKey:'2026-5-24', dateDisp:'May 24', play:'LAD -1.5',       sport:'MLB', units:1, odds:-105, result:'win',  score:'LAD 5–MIL 1',   pnl:+0.9524 },
 ];
 
 // ── FREE PLAY HISTORY (separate record) ──
 const freePlays = [
-  { date:'May 22', play:'TOR -1', odds:-115, result:'win', pnl:+0.87 },
+  { date:'May 22', play:'TOR -1',     odds:-115, result:'win',  pnl:+0.87 },
+  { date:'May 23', play:'PHI -1.5',   odds:+115, result:'win',  pnl:+2.30 },
+  { date:'May 24', play:'TOR -1',     odds:-115, result:'loss', pnl:-1.00 },
+  { date:'May 25', play:'TOR -1.5',   odds:+130, result:'pending', pnl:0  },
 ];
 function buildFreeRecord() {
   const wins = freePlays.filter(p=>p.result==='win').length;
@@ -441,7 +442,97 @@ function buildFreeRecord() {
 }
 buildFreeRecord();
 
-// ── SPORT SPLIT ──
+// ── COMPUTE ALL STATS DYNAMICALLY FROM PLAYS ARRAY ──
+function computeAndRenderStats() {
+  const total = plays.length;
+  const wins = plays.filter(p=>p.result==='win').length;
+  const losses = plays.filter(p=>p.result==='loss').length;
+  const net = +plays.reduce((s,p)=>s+p.pnl,0).toFixed(2);
+  const risked = plays.reduce((s,p)=>s+p.units,0);
+  const roi = +(net/risked*100).toFixed(1);
+  const wr = +(wins/total*100).toFixed(1);
+  const avgOdds = Math.round(plays.reduce((s,p)=>s+p.odds,0)/total);
+
+  // Banner
+  document.getElementById('vb-plays').textContent = total;
+  document.getElementById('vb-record').textContent = wins+'–'+losses;
+  document.getElementById('vb-roi').textContent = (roi>=0?'+':'')+roi+'%';
+
+  // KPI cards
+  document.getElementById('stat-net').textContent = (net>=0?'+':'')+net+'u';
+  document.getElementById('stat-net').style.color = net>=0?'var(--green)':'var(--red)';
+  document.getElementById('stat-roi').textContent = (roi>=0?'+':'')+roi+'%';
+  document.getElementById('stat-roi').style.color = roi>=0?'var(--green)':'var(--red)';
+  document.getElementById('stat-record').textContent = wins+'–'+losses;
+  document.getElementById('stat-plays').textContent = total+' plays settled';
+  document.getElementById('stat-wr').textContent = wr+'%';
+  document.getElementById('stat-risked').textContent = risked+'u';
+  document.getElementById('stat-avgodds').textContent = avgOdds>0?'+'+avgOdds:avgOdds;
+
+  // Play log header
+  document.getElementById('playLogHeader').textContent = 'All '+total+' settled plays · every result public';
+
+  // Monthly KPIs (all plays are May 2026)
+  document.getElementById('may-net').textContent = (net>=0?'+':'')+net+'u';
+  document.getElementById('may-net').style.color = net>=0?'var(--green)':'var(--red)';
+  document.getElementById('may-record').textContent = wins+'–'+losses;
+  document.getElementById('may-plays').textContent = total+' plays';
+  document.getElementById('may-roi').textContent = (roi>=0?'+':'')+roi+'%';
+  document.getElementById('may-roi').style.color = roi>=0?'var(--green)':'var(--red)';
+  document.getElementById('may-risked').textContent = risked+'u risked';
+  document.getElementById('may-wr').textContent = wr+'%';
+
+  // Monthly table row
+  document.getElementById('mr-plays').textContent = total;
+  document.getElementById('mr-record').textContent = wins+'–'+losses;
+  document.getElementById('mr-wr').textContent = wr+'%';
+  document.getElementById('mr-risked').textContent = risked+'u';
+  const mrNet = document.getElementById('mr-net');
+  mrNet.textContent = (net>=0?'+':'')+net+'u';
+  mrNet.style.color = net>=0?'var(--green)':'var(--red)';
+  const mrRoi = document.getElementById('mr-roi');
+  mrRoi.textContent = (roi>=0?'+':'')+roi+'%';
+  mrRoi.style.color = roi>=0?'var(--green)':'var(--red)';
+
+  // ROI and WR by unit size
+  const roiContainer = document.getElementById('roiByUnit');
+  const wrContainer = document.getElementById('wrByUnit');
+  roiContainer.innerHTML = '';
+  wrContainer.innerHTML = '';
+  [1,2,3].forEach((u,i,arr) => {
+    const up = plays.filter(p=>p.units===u);
+    if(!up.length) return;
+    const uw = up.filter(p=>p.result==='win').length;
+    const ul = up.filter(p=>p.result==='loss').length;
+    const un = +up.reduce((s,p)=>s+p.pnl,0).toFixed(2);
+    const ur = up.reduce((s,p)=>s+p.units,0);
+    const uroi = +(un/ur*100).toFixed(1);
+    const uwr = +(uw/up.length*100).toFixed(1);
+    const col = uroi>=0?'var(--green)':'var(--red)';
+    const isLast = i===arr.length-1;
+    roiContainer.innerHTML += `<div class="split-row${isLast?' split-row-last':''}"><span class="split-label">${u} Unit · ${up.length} plays · ${ur}u</span><span class="split-val" style="color:${col}">${uroi>=0?'+':''}${uroi}%</span></div>`;
+    wrContainer.innerHTML += `<div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;${isLast?'':'border-bottom:1px solid var(--border);'}"><span style="color:var(--text2)">${u} Unit · ${up.length} plays</span><span style="font-family:'DM Mono',monospace;font-weight:600;color:var(--text)">${uw}W–${ul}L · ${uwr}%</span></div>`;
+  });
+
+  // Weekly table
+  const weeks = [
+    {label:'Week 19', dates:'May 7–10',   ids:[1,2,3,4,5,6,7,8,9]},
+    {label:'Week 20', dates:'May 11–17',  ids:[10,11,12,13,14,15,16,17,18,19,20,21,22,23]},
+    {label:'Week 21', dates:'May 18–25',  ids:[24,25,26,27,28,29,31,32,33,34,36,37,38,39,40,41,43]},
+  ];
+  const wbody = document.getElementById('weeklyTableBody');
+  wbody.innerHTML = weeks.map(wk=>{
+    const wp = plays.filter(p=>wk.ids.includes(p.id));
+    const ww = wp.filter(p=>p.result==='win').length;
+    const wl = wp.filter(p=>p.result==='loss').length;
+    const wn = +wp.reduce((s,p)=>s+p.pnl,0).toFixed(2);
+    const wr2 = wp.reduce((s,p)=>s+p.units,0);
+    const wroi = +(wn/wr2*100).toFixed(1);
+    const col = wn>=0?'var(--green)':'var(--red)';
+    return `<tr><td><strong>${wk.label}</strong></td><td class="dim">${wk.dates}</td><td>${wp.length}</td><td>${ww}–${wl}</td><td>${wr2}u</td><td class="r" style="color:${col};font-family:'DM Mono',monospace;">${wn>=0?'+':''}${wn}u</td><td class="r" style="color:${col};font-family:'DM Mono',monospace;">${wroi>=0?'+':''}${wroi}%</td></tr>`;
+  }).join('');
+}
+computeAndRenderStats();
 const sportDefs = [{key:'MLB',emoji:'⚾'},{key:'NBA',emoji:'🏀'},{key:'NHL',emoji:'🏒'},{key:'NFL',emoji:'🏈'}];
 function buildSportSplit() {
   const container = document.getElementById('sportSplitContainer');
