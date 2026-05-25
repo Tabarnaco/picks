@@ -269,7 +269,7 @@
       <div class="kpi-card"><div class="kpi-label">Record</div><div class="kpi-value" id="stat-record">—</div><div class="kpi-sub" id="stat-plays">—</div></div>
       <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value" id="stat-wr">—</div><div class="kpi-sub">Breakeven = 52.4%</div></div>
       <div class="kpi-card"><div class="kpi-label">Units Risked</div><div class="kpi-value" id="stat-risked">—</div><div class="kpi-sub">Total wagered</div></div>
-      <div class="kpi-card highlight2"><div class="kpi-label">Avg Odds</div><div class="kpi-value" id="stat-avgodds">—</div><div class="kpi-sub">Blended line</div></div>
+      <div class="kpi-card"><div class="kpi-label">Avg Odds</div><div class="kpi-value" id="stat-avgodds">—</div><div class="kpi-sub">Blended line</div></div>
     </div>
     <div class="chart-section">
       <div class="section-header"><div><div class="section-title">Cumulative Unit P&L</div><div class="section-sub">Running total after each settled play</div></div></div>
@@ -431,13 +431,12 @@ const freePlays = [
   { date:'May 25', play:'TOR -1.5',   odds:+130, result:'pending', pnl:0  },
 ];
 function buildFreeRecord() {
-  const wins = freePlays.filter(p=>p.result==='win').length;
-  const losses = freePlays.filter(p=>p.result==='loss').length;
-  const net = freePlays.reduce((s,p)=>s+p.pnl,0);
-  const risked = freePlays.filter(p=>p.result!=='pending').length;
+  const settled = freePlays.filter(p=>p.result!=='pending');
+  const wins = settled.filter(p=>p.result==='win').length;
+  const losses = settled.filter(p=>p.result==='loss').length;
   document.getElementById('fp-plays').textContent = freePlays.length;
   document.getElementById('fp-record').textContent = wins + 'W–' + losses + 'L';
-  const wr = risked > 0 ? ((wins/risked)*100).toFixed(1)+'%' : '—';
+  const wr = settled.length > 0 ? ((wins/settled.length)*100).toFixed(1)+'%' : '—';
   document.getElementById('fp-units').textContent = wr;
 }
 buildFreeRecord();
@@ -451,7 +450,14 @@ function computeAndRenderStats() {
   const risked = plays.reduce((s,p)=>s+p.units,0);
   const roi = +(net/risked*100).toFixed(1);
   const wr = +(wins/total*100).toFixed(1);
-  const avgOdds = Math.round(plays.reduce((s,p)=>s+p.odds,0)/total);
+  // Convert American odds to implied probability, average, convert back
+  const avgImplied = plays.reduce((s,p)=>{
+    const o = p.odds;
+    return s + (o < 0 ? (-o)/(-o+100) : 100/(o+100));
+  },0) / total;
+  const avgOddsAmerican = avgImplied > 0.5
+    ? Math.round(-avgImplied/(1-avgImplied)*100)
+    : Math.round((1-avgImplied)/avgImplied*100);
 
   // Banner
   document.getElementById('vb-plays').textContent = total;
@@ -467,7 +473,7 @@ function computeAndRenderStats() {
   document.getElementById('stat-plays').textContent = total+' plays settled';
   document.getElementById('stat-wr').textContent = wr+'%';
   document.getElementById('stat-risked').textContent = risked+'u';
-  document.getElementById('stat-avgodds').textContent = avgOdds>0?'+'+avgOdds:avgOdds;
+  document.getElementById('stat-avgodds').textContent = avgOddsAmerican>0?'+'+avgOddsAmerican:avgOddsAmerican;
 
   // Play log header
   document.getElementById('playLogHeader').textContent = 'All '+total+' settled plays · every result public';
